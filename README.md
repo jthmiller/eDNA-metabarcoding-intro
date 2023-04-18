@@ -11,14 +11,14 @@ conda activate qiime2
 
 ## FASTQ sample QA/QC
 
-Fastp is used to trim off the poly-G tail commonly found in amplicon nova-seq data.
+- Fastp is used to trim off the poly-G tail commonly found in amplicon nova-seq data.
 
-Qiime imports the directory of poly-G trimmed FASTQ files into a single 'qiime file' with the 'qza' extension. Using the primer sequence, qiime's 'cutadapt' plugin removes the primer and adapters of each pair of sequences. A second 'qza' output file is created for the cutadapt trimmed data.   
+- Qiime imports the directory of poly-G trimmed FASTQ files into a single 'qiime file' with the 'qza' extension. Using the primer sequence, qiime's 'cutadapt' plugin removes the primer and adapters of each pair of sequences. A second 'qza' output file is created for the cutadapt trimmed data.   
 
 ## Denoising 
-Sequences can be denoised using qiime, which calls the R package 'dada2'. Denoising learns the error rate from the base call quality of the samples, and tries to fix sequencing errors when possible. Read pairs are merged into a single sequence when they sufficiently overlap and align. Denoising output is another qiime object that contains a table of the counts for each unique sequence (called ASVs, rows of table) found among the samples (columns, each sample name taken from the fastqs). The ASV sequences and the ASV ids are stored in the 'rep-seqs.qza'. The table of counts for each ASV is stored in the 'feat-table.qza' file. Both objects can be exported to a human readable format (FASTA) to visually inspect the sequences and tables. Or, qiime has a number of summary functions that can be applied to the qza files. Qiime summaries and plots can be viewed [her](https://view.qiime2.org)
+- Sequences can be denoised using qiime, which calls the R package 'dada2'. Denoising learns the error rate from the base call quality of the samples, and tries to fix sequencing errors when possible. Read pairs are merged into a single sequence when they sufficiently overlap and align. Denoising output is another qiime object that contains a table of the counts for each unique sequence (called ASVs, rows of table) found among the samples (columns, each sample name taken from the fastqs). The ASV sequences and the ASV ids are stored in the 'rep-seqs.qza'. The table of counts for each ASV is stored in the 'feat-table.qza' file. Both objects can be exported to a human readable format (FASTA) to visually inspect the sequences and tables. Or, qiime has a number of summary functions that can be applied to the qza files. Qiime summaries and plots can be viewed [her](https://view.qiime2.org)
 
-### Taxonomy assignment 
+## Taxonomy assignment 
 Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between 
 
 
@@ -32,9 +32,8 @@ See installation instructions for tronko [here](tronko). The reference database 
 Tree: ref-dbs/rbcl_diat.barcode-ref-tree.txt
 FASTA: ref-dbs/rbcl_diat.barcode-MSA.fasta
 
-## Visualizing the taxonomy assignments
-
-Qiime2 can generate helpful interactive barplots of the taxa abundance for sample 
+#### Visualizing the taxonomy assignments
+- Qiime2 can generate helpful interactive barplots of the taxa abundance for sample 
 
 #### Optional steps:
 
