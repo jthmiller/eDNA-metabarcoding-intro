@@ -19,7 +19,7 @@ conda activate qiime2
 - Sequences can be denoised using qiime, which calls the R package 'dada2'. Denoising learns the error rate from the base call quality of the samples, and tries to fix sequencing errors when possible. Read pairs are merged into a single sequence when they sufficiently overlap and align. Denoising output is another qiime object that contains a table of the counts for each unique sequence (called ASVs, rows of table) found among the samples (columns, each sample name taken from the fastqs). The ASV sequences and the ASV ids are stored in the 'rep-seqs.qza'. The table of counts for each ASV is stored in the 'feat-table.qza' file. Both objects can be exported to a human readable format (FASTA) to visually inspect the sequences and tables. Or, qiime has a number of summary functions that can be applied to the qza files. Qiime summaries and plots can be viewed [here](https://view.qiime2.org)
 
 ## Taxonomy assignment 
-Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between 
+- Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between 
 
 
 #### Qiime2 vsearch (code/qiime_tax.sh)
@@ -37,10 +37,11 @@ FASTA: ref-dbs/rbcl_diat.barcode-MSA.fasta
 
 #### Optional steps:
 
-As an additional check for the taxonomy assignments, I get the top blast hits for each ASV. If you use a specialized reference database, such as we do here, there will be many sequences with 'unassigned' taxonomy. Blasting is a way to double check that unassigned sequences are in fact off target taxa. After assigning taxonomy and blasting the sequences, I pull the results qiime and tronko taxon  
+- As an additional check for the taxonomy assignments, I get the top blast hits for each ASV. If you use a specialized reference database, such as we do here, there will be many sequences with 'unassigned' taxonomy. Blasting is a way to double check that unassigned sequences are in fact off target taxa. After assigning taxonomy and blasting the sequences, I pull the results qiime and tronko taxon  
 
 
-## Alpha and Beta Diversity (requires metadata formatted for import into qiime2)
+## Alpha and Beta Diversity 
+- requires metadata formatted for import into qiime2
 
 ## Differential Abundance Testing
 Songbird
