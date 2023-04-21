@@ -15,8 +15,8 @@ r=$(echo $f | sed 's/_R1_/_R2_/g')
 
 
    fastp \
-    --in1 $f \
-    --in2 $r \
+    --i $f \
+
     --html ${outdir}/html/${fb%_L002_R1_001.fastq.gz}.html \
     --out1 ${outdir}/$fb \
     --out2 ${outdir}/$rb \

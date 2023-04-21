@@ -14,6 +14,9 @@ This is an introduction analyzing eDNA metabarcoding samples to evaluate diversi
 ```
 /tmp/gen711_project_data/FMT_3/fmt-tutorial-demux-2
 /tmp/gen711_project_data/FMT_3/fmt-tutorial-demux-1
+
+/tmp/gen711_project_data/fastp-single.sh
+
 ```
 4. Cyanobacteria
 ```
