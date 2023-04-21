@@ -24,11 +24,6 @@ This is an introduction analyzing eDNA metabarcoding samples to evaluate diversi
 
 Your choice (ok with us to make sure it is feasible)
 
-
-## Duplicate my qiime conda env
-conda env create -f qiime2-env.yml
-conda activate qiime2
-
 For many of the commands below, you will need to replace the text between the < and > symbol with a path and file name. For example, if I made a directory to hold my qiime import output file called 'output' in my home directory, I would replace the '--output-path <path to an output directory>/<a name for the output files>.qza' part with '--output-path /home/unhAW/jtmiller/output/qiime_imported_file.qza' to run the command. 
 
 Once the data has been imported into qiime, all the data will be held in one or two files with the '.qza' extension. However, we will also generate some visualizations of the 'qza' files to view at qiime-view.org. We should give these files a '.qzv' extenstion instead (example: see 2nd command of step 3)
@@ -45,7 +40,12 @@ github-project-directory    gen711    shell_data   trimmed_fastqs
 1. Run Fastp to trim the 'poly-g' tails of the reads
 2. Import the directory of reads with qiime and save the output in your directory
 3. Use the 'cutadapt' program in qiime to trim off the primers
-3. 
+4. Start the denoising the reads (removing the low quality reads/bases)
+
+## Before you can run qiime or pther programs, activate the qiime2-2022.8 environment
+```
+conda activate genomics
+```
 
 ## FASTQ sample QA/QC
 1. Fastp is used to trim off the poly-G tail commonly found in amplicon nova-seq data. Run the fastp script by replacing the paths (the first one is to the directory of fastq files to trim, and then the path to your output directory that you made to store the trimmed fastqs). Copy the fastp.sh file to your project directory :

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-conda activate
+conda activate genomics
 
 indir="${1}"
 outdir="${2}"
