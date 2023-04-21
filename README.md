@@ -1,9 +1,6 @@
-# eDNA-metabarcoding-intro
+# eDNA-metabarcoding-guide for gen711/811
 
 This is an introduction analyzing eDNA metabarcoding samples to evaluate diversity, assign taxonomy, and differential abundance testing. Taxonomy assignments are compared between vsearch (qiime), command line BLAST, and Tronko (a recent phylogenetic approach to taxonomy assignment).   
-
-
-
 
 1. Metabarcoding to compare fish species across US estuaries.
 ```
@@ -23,7 +20,7 @@ This is an introduction analyzing eDNA metabarcoding samples to evaluate diversi
 ```
 or, your choice (ok with us to make sure it is feasible)
 
-## Overview of pipeline
+## Before you start...
 For many of the commands below, you will need to replace the text between the < and > symbol with a path and file name. For example, if I made a directory to hold my qiime import output file called 'output' in my home directory, I would replace the '--output-path <path to an output directory>/<a name for the output files>.qza' part with '--output-path /home/unhAW/jtmiller/output/qiime_imported_file.qza' to run the command. 
 
 Once the data has been imported into qiime, all the data will be held in one or two files with the '.qza' extension. However, we will also generate some visualizations of the 'qza' files to view at qiime-view.org. We should give these files a '.qzv' extenstion instead (example: see 2nd command of step 3)
@@ -43,6 +40,7 @@ git push
 ```
 If you get an error about the password and token, ask for help. We will help you fix it. 
 
+## Overview of pipeline
 Steps:
 1. Run Fastp to trim the 'poly-g' tails of the reads
 2. Import the directory of reads with qiime and save the output in your directory
