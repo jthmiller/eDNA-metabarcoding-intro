@@ -4,19 +4,20 @@ This is an introduction analyzing eDNA metabarcoding samples to evaluate diversi
 
 1. Metabarcoding to compare fish species across US estuaries.
 ```
-/tmp/gen711_project_data/fish
+/tmp/gen711_project_data/fish/fastqs
 ```
 2. Metabarcoding of Algae (Diatoms) to compare high and low quality streams.
 ```
-/tmp/gen711_project_data/algae
+/tmp/gen711_project_data/algae/fastqs
 ```
 3. Fecal microbiota transplant (FMT) study. Metabarcoding of human guts.
 ```
-/tmp/gen711_project_data/FMT
+/tmp/gen711_project_data/FMT_3/fmt-tutorial-demux-2
+/tmp/gen711_project_data/FMT_3/fmt-tutorial-demux-1
 ```
 4. Cyanobacteria
 ```
-/tmp/gen711_project_data/cyano
+/tmp/gen711_project_data/cyano/fastqs
 ```
 or, your choice (ok with us to make sure it is feasible)
 
@@ -99,13 +100,28 @@ qiime demux summarize \
 ## Denoising 
 - Sequences can be denoised using qiime, which calls the R package 'dada2'. Denoising learns the error rate from the base call quality of the samples, and tries to fix sequencing errors when possible. Read pairs are merged into a single sequence when they sufficiently overlap and align. Denoising output is another qiime object that contains a table of the counts for each unique sequence (called ASVs, rows of table) found among the samples (columns, each sample name taken from the fastqs). The ASV sequences and the ASV ids are stored in the 'rep-seqs.qza'. The table of counts for each ASV is stored in the 'feat-table.qza' file. Both objects can be exported to a human readable format (FASTA) to visually inspect the sequences and tables. Or, qiime has a number of summary functions that can be applied to the qza files. Qiime summaries and plots can be viewed [here](https://view.qiime2.org)
 
+```
+qiime dada2 denoise-paired \
+    --i-demultiplexed-seqs qiime_out/${run}_demux_cutadapt.qza  \
+    --p-trunc-len-f ${trunclenf} \
+    --p-trunc-len-r ${trunclenr} \
+    --p-trim-left-f 0 \
+    --p-trim-left-r 0 \
+    --p-n-threads 4 \
+    --o-denoising-stats <path to an output directory>/denoising-stats.qza \
+    --o-table <path to an output directory>/feature_table.qza \
+    --o-representative-sequences <path to an output directory>/rep-seqs.qza
 
+qiime metadata tabulate \
+    --m-input-file <path to an output directory>/denoising-stats.qza \
+    --o-visualization <path to an output directory>/denoising-stats.qzv
 
+qiime feature-table tabulate-seqs \
+        --i-data <path to an output directory>/rep-seqs.qza \
+        --o-visualization <path to an output directory>/rep-seqs.qzv
+```
 
-
-
-
-## Taxonomy assignment 
+## Taxonomy assignment (If you made it to this point on 4/21, you can stop for the day)
 - Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between 
 
 
