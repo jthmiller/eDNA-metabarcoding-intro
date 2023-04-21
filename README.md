@@ -62,6 +62,10 @@ conda activate genomics
 ```
 cp /tmp/gen711_project_data/fastp.sh <path to github directory>/fastp.sh
 chmod +x <path to github directory>/fastp.sh
+
+cp /tmp/gen711_project_data/fastp-single.sh <path to github directory>/fastp-single.sh
+chmod +x <path to github directory>/fastp-single.sh
+
 ```
 The fastp script need 3 things:
 1. the poly-g length cutoff
