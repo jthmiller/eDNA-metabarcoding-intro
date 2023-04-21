@@ -49,9 +49,9 @@ github-project-directory    gen711    shell_data   trimmed_fastqs
 
 ## FASTQ sample QA/QC
 1. Fastp is used to trim off the poly-G tail commonly found in amplicon nova-seq data. Run the fastp script by replacing the paths (the first one is to the directory of fastq files to trim, and then the path to your output directory that you made to store the trimmed fastqs). Copy the fastp.sh file to your project directory :
-
+```
 ./fastp.sh <path to fastq directory> <path to your output directory>
-
+```
 2. Imports the directory of poly-G trimmed FASTQ files into a single 'qiime file' with the 'qza' extension with the 'qiime tools import' command below. 
 ```
 qiime tools import \
@@ -65,7 +65,7 @@ qiime tools import \
 
 The primer list can be found [here]
 
-
+```
 qiime cutadapt trim-paired \
     --i-demultiplexed-sequences <path to the file from step 2> \
     --p-cores 4 \
@@ -79,6 +79,7 @@ qiime cutadapt trim-paired \
 qiime demux summarize \
 --i-data <path to the file from step above> \
 --o-visualization  <path to an output directory>/<a name for the output files>.qzv 
+```
 
 ## Denoising 
 - Sequences can be denoised using qiime, which calls the R package 'dada2'. Denoising learns the error rate from the base call quality of the samples, and tries to fix sequencing errors when possible. Read pairs are merged into a single sequence when they sufficiently overlap and align. Denoising output is another qiime object that contains a table of the counts for each unique sequence (called ASVs, rows of table) found among the samples (columns, each sample name taken from the fastqs). The ASV sequences and the ASV ids are stored in the 'rep-seqs.qza'. The table of counts for each ASV is stored in the 'feat-table.qza' file. Both objects can be exported to a human readable format (FASTA) to visually inspect the sequences and tables. Or, qiime has a number of summary functions that can be applied to the qza files. Qiime summaries and plots can be viewed [here](https://view.qiime2.org)
