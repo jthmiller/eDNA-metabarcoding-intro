@@ -19,7 +19,7 @@ This is an introduction analyzing eDNA metabarcoding samples to evaluate diversi
 ```
 4. Cyanobacteria
 ```
-/tmp/gen711_project_data/FMT
+/tmp/gen711_project_data/cyano
 ```
 
 Your choice (ok with us to make sure it is feasible)
@@ -50,7 +50,9 @@ github-project-directory    gen711    shell_data   trimmed_fastqs
 ## FASTQ sample QA/QC
 1. Fastp is used to trim off the poly-G tail commonly found in amplicon nova-seq data. Run the fastp script by replacing the paths (the first one is to the directory of fastq files to trim, and then the path to your output directory that you made to store the trimmed fastqs). Copy the fastp.sh file to your project directory :
 ```
-./fastp.sh <path to fastq directory> <path to your output directory>
+cp /tmp/gen711_project_data/fastp.sh <path to github directory>/fastp.sh
+chmod +x <path to github directory>/fastp.sh
+<path to github directory>/fastp.sh <path to fastq directory> <path to your output directory>
 ```
 2. Imports the directory of poly-G trimmed FASTQ files into a single 'qiime file' with the 'qza' extension with the 'qiime tools import' command below. 
 ```
