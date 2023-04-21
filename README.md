@@ -33,11 +33,22 @@ Make a directory to hold your files like fastqs just outside your github directo
 > ls
 github-project-directory    gen711    shell_data   trimmed_fastqs 
 ```
+When you make an output file that you want to download, you can move it into your github project directory, add/upload it to your github repo, and then view/download it from there. 
+
+```
+cd <my_github_project_on_ron_directory>
+git add <file-to-add-to-repo.qzv>
+git commit -m 'any note that you want'
+git push
+```
+If you get an error about the password and token, ask for help. We will help you fix it. 
+
 Steps:
 1. Run Fastp to trim the 'poly-g' tails of the reads
 2. Import the directory of reads with qiime and save the output in your directory
 3. Use the 'cutadapt' program in qiime to trim off the primers
 4. Start the denoising the reads (removing the low quality reads/bases)
+5. Start here next week's lab
 
 ## Before you can run qiime or other programs, activate the genomics environment
 ```
@@ -49,9 +60,16 @@ conda activate genomics
 ```
 cp /tmp/gen711_project_data/fastp.sh <path to github directory>/fastp.sh
 chmod +x <path to github directory>/fastp.sh
-<path to github directory>/fastp.sh <path to fastq directory> <path to your output directory>
 ```
-2. Imports the directory of poly-G trimmed FASTQ files into a single 'qiime file' with the 'qza' extension with the 'qiime tools import' command below. 
+The fastp script need 3 things:
+1. the poly-g length cutoff
+2. the directory of the reads to trim
+3. the directory that you will store the reads in
+
+```
+<path to github directory>/fastp.sh <1.poly-g length> <1.path to fastq directory>  <3.path to your output directory>
+```
+2. Next, import the directory of poly-G trimmed FASTQ files into a single 'qiime file' with the 'qza' extension with the 'qiime tools import' command below. 
 ```
 qiime tools import \
    --type "SampleData[PairedEndSequencesWithQuality]"  \
@@ -62,7 +80,7 @@ qiime tools import \
 
 3. Using the primer sequence, qiime's 'cutadapt' plugin removes the primer and adapters of each pair of sequences. You need to select the correct primers to provide qiime and cutadapt. A second 'qza' output file is created for the cutadapt trimmed data. Name it something that makes sense and add the 'qza' extension, so the output path should look something like: /path/to/output/directory/cutadapt-sequences.qza. Run the 'demux summarize' to make a summary.qzv file for    
 
-The primer list can be found [here]
+The primer list can be found [here](primer-list.md)
 
 ```
 qiime cutadapt trim-paired \
