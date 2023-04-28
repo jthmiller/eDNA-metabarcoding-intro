@@ -125,6 +125,9 @@ qiime demux summarize \
 
 Remember: the input for many of these commands is the output from the previous command. In the example below, the input '--i-demultiplexed-seqs <output path>/cutadapt-sequences-1.qza' is indicated by the '--i' part. This file was the output that you made with qiime cutadapt above with '--o-trimmed-sequences <output path>/cutadapt-sequences-1.qza'
 
+The trunclenf and trunclenr can be found in the same file that you found the primer sequences [here](primer-list.md)
+
+For the FMT study, this is the last step that you will need to run twice.
 ```
 qiime dada2 denoise-paired \
     --i-demultiplexed-seqs <output path>/cutadapt-sequences-1.qza  \
@@ -133,9 +136,9 @@ qiime dada2 denoise-paired \
     --p-trim-left-f 0 \
     --p-trim-left-r 0 \
     --p-n-threads 4 \
-    --o-denoising-stats <output path>/denoising-stats.qza \
-    --o-table <output path>/feature_table.qza \
-    --o-representative-sequences <output path>/rep-seqs.qza
+    --o-denoising-stats <output path>/denoising-stats-1.qza \
+    --o-table <output path>/feature_table-1.qza \
+    --o-representative-sequences <output path>/rep-seqs-1.qza
 
 qiime metadata tabulate \
     --m-input-file <output path>/denoising-stats.qza \
@@ -147,33 +150,9 @@ qiime feature-table tabulate-seqs \
 ```
 
 ## Taxonomy assignment (If you made it to this point on 4/21, you can stop for the day)
-- Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between 
+- Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between primer and reference databases. 
 
 
-#### Qiime2 vsearch (code/qiime_tax.sh)
-The reference database of rbcl for Qiime built from ____ (script for building): 
-Qiime object taxonomy: ref-dbs/
-Qiime object sequences: ref-dbs/
-
-##### Tronko (code/tronko_tax.sh)
-See installation instructions for tronko [here](https://github.com/lpipes/tronko). The reference database of rbcl for tronko was built from [diat.barcode](https://github.com/fkeck/diatbarcode) with [this](script for building): 
-Tree: ref-dbs/rbcl_diat.barcode-ref-tree.txt
-FASTA: ref-dbs/rbcl_diat.barcode-MSA.fasta
-
-#### Visualizing the taxonomy assignments
-- Qiime2 can generate helpful interactive barplots of the taxa abundance for sample 
-
-#### Optional steps:
-
-- As an additional check for the taxonomy assignments, I get the top blast hits for each ASV. If you use a specialized reference database, such as we do here, there will be many sequences with 'unassigned' taxonomy. Blasting is a way to double check that unassigned sequences are in fact off target taxa. After assigning taxonomy and blasting the sequences, I pull the results qiime and tronko taxon  
-
-
-## Alpha and Beta Diversity 
-- requires metadata formatted for import into qiime2
-
-## Differential Abundance Testing
-Songbird
-qurro
 
 ## 7. Phylogenetic placement of ASVs
 
