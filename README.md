@@ -6,7 +6,7 @@ This is an introduction analyzing eDNA metabarcoding samples to evaluate diversi
 ```
 /tmp/gen711_project_data/fish/fastqs
 ```
-2. Metabarcoding of Algae (Diatoms) to compare high and low quality streams.
+2. Metabarcoding of Algae (Diatoms) using rbcl to compare high and low quality streams.
 ```
 /tmp/gen711_project_data/algae/fastqs
 ```
@@ -123,25 +123,27 @@ qiime demux summarize \
 ## Denoising 
 - Sequences can be denoised using qiime, which calls the R package 'dada2'. Denoising learns the error rate from the base call quality of the samples, and tries to fix sequencing errors when possible. Read pairs are merged into a single sequence when they sufficiently overlap and align. Denoising output is another qiime object that contains a table of the counts for each unique sequence (called ASVs, rows of table) found among the samples (columns, each sample name taken from the fastqs). The ASV sequences and the ASV ids are stored in the 'rep-seqs.qza'. The table of counts for each ASV is stored in the 'feat-table.qza' file. Both objects can be exported to a human readable format (FASTA) to visually inspect the sequences and tables. Or, qiime has a number of summary functions that can be applied to the qza files. Qiime summaries and plots can be viewed [here](https://view.qiime2.org)
 
+Remember: the input for many of these commands is the output from the previous command. In the example below, the input '--i-demultiplexed-seqs <output path>/cutadapt-sequences-1.qza' is indicated by the '--i' part. This file was the output that you made with qiime cutadapt above with '--o-trimmed-sequences <output path>/cutadapt-sequences-1.qza'
+
 ```
 qiime dada2 denoise-paired \
-    --i-demultiplexed-seqs qiime_out/${run}_demux_cutadapt.qza  \
-    --p-trunc-len-f  \
-    --p-trunc-len-r ${trunclenr} \
+    --i-demultiplexed-seqs <output path>/cutadapt-sequences-1.qza  \
+    --p-trunc-len-f  <trunclenf> \
+    --p-trunc-len-r <trunclenr> \
     --p-trim-left-f 0 \
     --p-trim-left-r 0 \
     --p-n-threads 4 \
-    --o-denoising-stats <path to an output directory>/denoising-stats.qza \
-    --o-table <path to an output directory>/feature_table.qza \
-    --o-representative-sequences <path to an output directory>/rep-seqs.qza
+    --o-denoising-stats <output path>/denoising-stats.qza \
+    --o-table <output path>/feature_table.qza \
+    --o-representative-sequences <output path>/rep-seqs.qza
 
 qiime metadata tabulate \
-    --m-input-file <path to an output directory>/denoising-stats.qza \
-    --o-visualization <path to an output directory>/denoising-stats.qzv
+    --m-input-file <output path>/denoising-stats.qza \
+    --o-visualization <output path>/denoising-stats.qzv
 
 qiime feature-table tabulate-seqs \
-        --i-data <path to an output directory>/rep-seqs.qza \
-        --o-visualization <path to an output directory>/rep-seqs.qzv
+        --i-data <output path>/rep-seqs.qza \
+        --o-visualization <output path>/rep-seqs.qzv
 ```
 
 ## Taxonomy assignment (If you made it to this point on 4/21, you can stop for the day)
