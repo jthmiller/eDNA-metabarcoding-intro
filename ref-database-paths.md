@@ -9,6 +9,7 @@ refreads = /tmp/gen711_project_data/reference_databases/silva-138-99-seqs.qza
 reftax = /tmp/gen711_project_data/reference_databases/silva-138-99-tax.qza
   
 ### 3. Fecal Transplant (FTP)
+classifier = /tmp/gen711_project_data/reference_databases/classifier.qza
 
 
 ### 16s Cyanobacteria
