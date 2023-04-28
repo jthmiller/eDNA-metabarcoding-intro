@@ -169,13 +169,13 @@ Here is what is needed for all other datasets:
 ```
 qiime feature-classifier classify-consensus-vsearch \
   --i-query results/2019-2022_merged.rep-seqs.qza \
-  --i-reference-reads ${refreads} \
-  --i-reference-taxonomy  ${reftax} \
-  --p-maxaccepts ${maxaccepts} \
-  --p-query-cov ${query_cov} \
-  --p-perc-identity ${perc_identity} \
+  --i-reference-reads $<refreads> \
+  --i-reference-taxonomy  $<reftax> \
+  --p-maxaccepts $<maxaccepts> \
+  --p-query-cov $<query_cov> \
+  --p-perc-identity $<perc_identity> \
   --p-threads 36 \
-  --p-weak-id ${weak_id} \
+  --p-weak-id $<weak_id> \
   --o-classification results/2019-2022_vsearch_taxonomy
 ```
 
