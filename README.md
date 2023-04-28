@@ -126,7 +126,7 @@ qiime demux summarize \
 ```
 qiime dada2 denoise-paired \
     --i-demultiplexed-seqs qiime_out/${run}_demux_cutadapt.qza  \
-    --p-trunc-len-f ${trunclenf} \
+    --p-trunc-len-f  \
     --p-trunc-len-r ${trunclenr} \
     --p-trim-left-f 0 \
     --p-trim-left-r 0 \
