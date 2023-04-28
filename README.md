@@ -162,23 +162,40 @@ qiime feature-classifier classify-sklearn \
   --i-classifier /tmp/gen711_project_data/reference_databases/classifier.qza \
   --i-reads <output path>/merged.rep-seqs.qza \
   --o-classification <output path>/FMT-taxonomy.qza
+
+qiime taxa barplot \
+     --i-table <output path>/feature_table-1.qza \
+     --i-taxonomy <output path>/FMT-taxonomy.qza \
+     --o-visualization <output path>/barplot-1.qzv
+
+qiime taxa barplot \
+     --i-table <output path>/feature_table-2.qza \
+     --i-taxonomy <output path>/FMT-taxonomy.qza \
+     --o-visualization <output path>/barplot-2.qzv
 ```
 
 Here is what is needed for all other datasets:
 
 ```
 qiime feature-classifier classify-consensus-vsearch \
-  --i-query results/2019-2022_merged.rep-seqs.qza \
-  --i-reference-reads $<refreads> \
-  --i-reference-taxonomy  $<reftax> \
-  --p-maxaccepts $<maxaccepts> \
-  --p-query-cov $<query_cov> \
-  --p-perc-identity $<perc_identity> \
+  --i-query <output path>/rep-seqs.qza \
+  --i-reference-reads <refreads> \
+  --i-reference-taxonomy  <reftax> \
+  --p-maxaccepts 10 \
+  --p-query-cov 0.80 \
+  --p-perc-identity 0.9 \
   --p-threads 36 \
-  --p-weak-id $<weak_id> \
-  --o-classification results/2019-2022_vsearch_taxonomy
+  --o-classification <output path>/taxonomy.qza
+
+### Barplot 
+qiime taxa barplot \
+     --i-table <output path>/feature_table-1.qza \
+     --i-taxonomy <output path>/taxonomy.qza \
+     --o-visualization <output path>/my-barplot.qzv
+
 ```
 
+If you get here 4/28, you can stop.
 
 ## 7. Phylogenetic placement of ASVs
 
