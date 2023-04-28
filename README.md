@@ -52,10 +52,21 @@ Steps:
 4. Start the denoising the reads (removing the low quality reads/bases)
 5. Start here next week's lab
 
-## Before you can run qiime or other programs, activate the genomics environment
+## Before you can run programs like fastp and qiime, activate an environment 
 ```
+### To run fastp for trimming
 conda activate genomics
+
+### To run any of the qiime commands
+conda activate qiime2-2022.8
 ```
+Once you've activated an environment, it should be listed on your command line instead of 'base'. See the example below.
+```
+(base) jtmiller@ron:~$ conda activate qiime2-2022.8
+QIIME is caching your current deployment for improved performance. This may take a few moments and should only happen once per deployment.
+(qiime2-2022.8) jtmiller@ron:~$ 
+```
+
 
 ## FASTQ sample QA/QC
 1. Fastp is used to trim off the poly-G tail commonly found in amplicon nova-seq data. Run the fastp script by replacing the paths (the first one is to the directory of fastq files to trim, and then the path to your output directory that you made to store the trimmed fastqs). Copy the fastp.sh file to your project directory :
@@ -63,6 +74,7 @@ conda activate genomics
 cp /tmp/gen711_project_data/fastp.sh <path to github directory>/fastp.sh
 chmod +x <path to github directory>/fastp.sh
 
+### For the FMT study
 cp /tmp/gen711_project_data/fastp-single.sh <path to github directory>/fastp-single.sh
 chmod +x <path to github directory>/fastp-single.sh
 
@@ -74,8 +86,12 @@ The fastp script need 3 things:
 
 ```
 <path to github directory>/fastp.sh <1.poly-g length> <1.path to fastq directory>  <3.path to your output directory>
+
+### For the FMT study
+<path to github directory>/fastp-single.sh 120 <1.path to fastq directory>  <3.path to your output directory>
+
 ```
-2. Next, import the directory of poly-G trimmed FASTQ files into a single 'qiime file' with the 'qza' extension with the 'qiime tools import' command below. 
+2. Next, import the directory of poly-G trimmed FASTQ files into a single 'qiime file' with the 'qza' extension with the 'qiime tools import' command below. If you are doing the Fecal transplant study, you will need to run this command twice, once for the demux-1 directory and once for the demux-2 directory. Give the output a different name the second time you run it ( such as 'demux-1.qza' and 'demux-2.qza')
 ```
 qiime tools import \
    --type "SampleData[PairedEndSequencesWithQuality]"  \
@@ -84,7 +100,7 @@ qiime tools import \
    --output-path <path to an output directory>/<a name for the output files> \
 ```
 
-3. Using the primer sequence, qiime's 'cutadapt' plugin removes the primer and adapters of each pair of sequences. You need to select the correct primers to provide qiime and cutadapt. A second 'qza' output file is created for the cutadapt trimmed data. Name it something that makes sense and add the 'qza' extension, so the output path should look something like: /path/to/output/directory/cutadapt-sequences.qza. Run the 'demux summarize' to make a summary.qzv file for    
+3. Using the primer sequence, qiime's 'cutadapt' plugin removes the primer and adapters of each pair of sequences. You need to select the correct primers to provide qiime and cutadapt. A second 'qza' output file is created for the cutadapt trimmed data. Name it something that makes sense and add the 'qza' extension, so the output path should look something like: /path/to/your/output/directory/cutadapt-sequences.qza. Run the 'demux summarize' on this file to make a summary.qzv file to view later. For the FMT study, you will run the command twice (once for 'demux-1.qza' and once for 'demux-2.qza'). Name the outputs something like cutadapt-sequences-1.qza and cutadapt-sequences-2.qza.
 
 The primer list can be found [here](primer-list.md)
 
