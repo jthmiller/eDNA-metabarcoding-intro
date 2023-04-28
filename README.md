@@ -149,9 +149,35 @@ qiime feature-table tabulate-seqs \
         --o-visualization <output path>/rep-seqs.qzv
 ```
 
-## Taxonomy assignment (If you made it to this point on 4/21, you can stop for the day)
-- Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between primer and reference databases. 
+## Taxonomy assignment 
+- Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between primer and reference databases. This is the step that finally gets easier for the FMT compared to the other datasets. Here is how you assign taxonomy on the FMT dataset
+```
+## For FMT only
+qiime feature-table merge-seqs \
+    --i-data <output path>/rep-seqs-1.qza
+   --i-data <output path>/rep-seqs-2.qza \
+   --o-merged-data <output path>/merged.rep-seqs.qza
 
+qiime feature-classifier classify-sklearn \
+  --i-classifier /tmp/gen711_project_data/reference_databases/classifier.qza \
+  --i-reads <output path>/merged.rep-seqs.qza \
+  --o-classification <output path>/FMT-taxonomy.qza
+```
+
+Here is what is needed for all other datasets:
+
+```
+qiime feature-classifier classify-consensus-vsearch \
+  --i-query results/2019-2022_merged.rep-seqs.qza \
+  --i-reference-reads ${refreads} \
+  --i-reference-taxonomy  ${reftax} \
+  --p-maxaccepts ${maxaccepts} \
+  --p-query-cov ${query_cov} \
+  --p-perc-identity ${perc_identity} \
+  --p-threads 36 \
+  --p-weak-id ${weak_id} \
+  --o-classification results/2019-2022_vsearch_taxonomy
+```
 
 
 ## 7. Phylogenetic placement of ASVs
