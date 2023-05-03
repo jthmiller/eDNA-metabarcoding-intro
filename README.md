@@ -17,6 +17,9 @@ This is an introduction analyzing eDNA metabarcoding samples to evaluate diversi
 
 /tmp/gen711_project_data/fastp-single.sh
 
+### Here is the new metadata for the FMT study
+/tmp/gen711_project_data/FMT_3/sample-metadata.tsv
+
 ```
 4. Cyanobacteria
 ```
