@@ -4,8 +4,8 @@ This is an introduction analyzing eDNA metabarcoding samples to evaluate diversi
 
 
 ## Duplicate my qiime conda env
-conda env create -f qiime2-env.yml
-conda activate qiime2
+conda env create -f qiime2-env.yml  
+conda activate qiime2  
 
 ## Overview of pipeline
 
