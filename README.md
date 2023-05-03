@@ -5,9 +5,10 @@ Pipeline for evaluating diversity, assigning taxonomy, and differential abundanc
 Raw sequence data is processed to ASVs with DADA/Qiime2. Taxonomy assignments are compared between vsearch (Qiime2), command line BLAST, and Tronko (a recent phylogenetic approach to taxonomy assignment). The conda environment for the pipeline is [here](qiime2-env.yml)   
 
 ## Duplicate the qiime conda environment
+```
 conda env create -f qiime2-env.yml  
 conda activate qiime2  
-
+```
 ## Overview of pipeline
 
 ## FASTQ sample QA/QC
