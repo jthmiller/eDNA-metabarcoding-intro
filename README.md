@@ -1,8 +1,10 @@
 # Metabarcoding algae from rbcl (methods comparison)
 
-This is an introduction analyzing eDNA metabarcoding samples to evaluate diversity, assign taxonomy, and differential abundance testing. Taxonomy assignments are compared between vsearch (qiime), command line BLAST, and Tronko (a recent phylogenetic approach to taxonomy assignment).   
+Pipeline for evaluating diversity, assigning taxonomy, and differential abundance testing of algae samples with rbcl amplicons (vers) with the diat.barcode reference database. 
 
-## Duplicate my qiime conda env
+Raw sequence data is processed to ASVs with DADA/Qiime2. Taxonomy assignments are compared between vsearch (Qiime2), command line BLAST, and Tronko (a recent phylogenetic approach to taxonomy assignment). The conda environment for the pipeline is [here](qiime2-env.yml)   
+
+## Duplicate the qiime conda environment
 conda env create -f qiime2-env.yml  
 conda activate qiime2  
 
@@ -10,7 +12,7 @@ conda activate qiime2
 
 ## FASTQ sample QA/QC
 
-- Fastp is used to trim off the poly-G tail commonly found in amplicon nova-seq data.
+- The 2-color chemistry of recent illumina sequencing platforms results in long, poly-g tails added to sequenced fragments that are less than 250-bp ling. Fastp can trim off the poly-G tails reads and toss those that are below a threashold (usually the primer-dimer reads that are trimmed to ~75-bp or so)
 
 - Qiime imports the directory of poly-G trimmed FASTQ files into a single 'qiime file' with the 'qza' extension. Using the primer sequence, qiime's 'cutadapt' plugin removes the primer and adapters of each pair of sequences. A second 'qza' output file is created for the cutadapt trimmed data.   
 
