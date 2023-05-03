@@ -12,7 +12,7 @@ To do:
 - add sample dataset for compare Susie/Jeff workflow
     - The fastqs will need to be provided via google drive or other 
 
-### Methods Comparison
+### Overview of pipeline
 This repo is to compare pipelines for evaluating diversity, assigning taxonomy, and differential abundance testing on environmental algae samples and rbcl amplicons (vers). The pipeline uses the [diat.barcode](https://www.nature.com/articles/s41598-019-51500-6) reference database. Raw sequence data is processed to ASVs with DADA/Qiime2. Taxonomy assignments are compared between vsearch in [Qiime2](https://qiime2.org), command line BLAST, and [Tronko](https://github.com/lpipes/tronko) (a recent phylogenetic approach to taxonomy assignment). The conda environment for the pipeline is [here](qiime2-env.yml)   
 
 ## Duplicate the qiime conda environment
@@ -20,7 +20,6 @@ This repo is to compare pipelines for evaluating diversity, assigning taxonomy, 
 conda env create -f qiime2-env.yml  
 conda activate qiime2  
 ```
-## Overview of pipeline
 
 ## FASTQ sample QA/QC
 
