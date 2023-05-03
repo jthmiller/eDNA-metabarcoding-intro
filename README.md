@@ -1,4 +1,5 @@
-# Metabarcoding algae from rbcl (methods comparison)
+# Metabarcoding algae from rbcl 
+### methods comparison
 
 Pipeline for evaluating diversity, assigning taxonomy, and differential abundance testing of algae samples with rbcl amplicons (vers) with the diat.barcode reference database. 
 
@@ -27,8 +28,7 @@ conda activate qiime2
 #### Output: rep-seqs.qza (ASVs) and feature-table.qza (per sample ASV counts)
 
 ## Taxonomy assignment 
-- Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between 
-
+Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between metabarcoding loci and sample composition. Our approach is to run multiple assignment methods and  
 
 #### Qiime2 vsearch (code/qiime_tax.sh)
 The reference database of rbcl for Qiime built from ____ (script for building): 
@@ -42,11 +42,10 @@ Qiime object sequences: ref-dbs/
     - FASTA: ref-dbs/rbcl_diat.barcode-MSA.fasta
 
 #### Visualizing the taxonomy assignments
-- Qiime2 can generate helpful interactive barplots of the taxa abundance for sample 
+Qiime2 can generate helpful interactive barplots of the taxa abundance for sample 
 
 #### Optional steps:
-
-- As an additional check for the taxonomy assignments, I get the top blast hits for each ASV. If you use a specialized reference database, such as we do here, there will be many sequences with 'unassigned' taxonomy. Blasting is a way to double check that unassigned sequences are in fact off target taxa. After assigning taxonomy and blasting the sequences, I pull the results qiime and tronko taxon  
+As an additional check for the taxonomy assignments, I get the top blast hits for each ASV. If you use a specialized reference database, such as we do here, there will be many sequences with 'unassigned' taxonomy. Blasting is a way to double check that unassigned sequences are in fact off target taxa. After assigning taxonomy and blasting the sequences, I pull the results qiime and tronko taxon  
 
 
 ## Alpha and Beta Diversity 
