@@ -5,7 +5,7 @@ Differences to discuss:
 - Choosing the ```--p-trunc-len-f``` and ```--p-trunc-len-r``` from the quality plots. This step has the potential to impact results across workflows/users. 
     - Truncating too short --> reads will not merge up. 
     - Truncating too long --> more ASVs due to more sequencing errors at ends of reads.    
-    
+
 To do:
 - add diat.barcode tree and reference database 
 - add qiime2 and tronko taxonomy assignment workflow
@@ -49,12 +49,12 @@ conda activate qiime2
 #### Output: rep-seqs.qza (ASVs) and feature-table.qza (per sample ASV counts)
 
 ## Taxonomy assignment 
-Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between metabarcoding loci and sample composition. Our approach is to run multiple assignment methods and  
+Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between metabarcoding loci and sample composition. Our approach is to run multiple assignment methods.  
 
 #### Qiime2 vsearch (code/qiime_tax.sh)
-The reference database of rbcl for Qiime built from ____ (script for building): 
-Qiime object taxonomy: ref-dbs/
-Qiime object sequences: ref-dbs/
+The reference database of rbcl for Qiime built from ____ (script for building):  
+Qiime object taxonomy: ref-dbs/  
+Qiime object sequences: ref-dbs/  
 
 ##### Tronko (code/tronko_tax.sh)
 - See installation instructions for tronko [here](https://github.com/lpipes/tronko). 
