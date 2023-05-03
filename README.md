@@ -10,7 +10,8 @@ To do:
 - add diat.barcode tree and reference database 
 - add qiime2 and tronko taxonomy assignment workflow
 - add sample dataset for compare Susie/Jeff workflow
-    - The fastqs will need to be provided via google drive or other 
+    - The fastqs will need to be provided via google drive or other
+    - Rep-seq and feature tables for the sample dataset are [here](data/)
 
 ### Overview of pipeline
 This repo is to compare pipelines for evaluating diversity, assigning taxonomy, and differential abundance testing on environmental algae samples and rbcl amplicons (vers). The pipeline uses the [diat.barcode](https://www.nature.com/articles/s41598-019-51500-6) reference database. Raw sequence data is processed to ASVs with DADA/Qiime2. Taxonomy assignments are compared between vsearch in [Qiime2](https://qiime2.org), command line BLAST, and [Tronko](https://github.com/lpipes/tronko) (a recent phylogenetic approach to taxonomy assignment). The conda environment for the pipeline is [here](qiime2-env.yml)   
@@ -25,7 +26,7 @@ conda activate qiime2
 
 - The 2-color chemistry of recent illumina sequencing platforms results in long, poly-g tails added to sequenced fragments that are less than 250-bp ling. Fastp can trim off the poly-G tails reads and toss those that are below a threshold (usually the primer-dimer reads that are trimmed to ~75-bp or so)
 - Qiime imports the directory of poly-G trimmed FASTQ files into a single 'qiime file' with the 'qza' extension. Using the primer sequence, qiime's 'cutadapt' plugin removes the primer and adapters of each pair of sequences. A second 'qza' output file is created for the cutadapt trimmed data.
-- Qiime also calls the program [cutadapt](web address) filter out reads that do not have the primer sequence, and to trim off the sequences from reads that do. 
+- Qiime also calls the program [cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) filter out reads that do not have the primer sequence, and to trim off the sequences from reads that do. 
 
 #### How do our pipelines differ?
 - The default threshold for filtering reads without the primer site ```--p-error-rate``` is 0.1. Discuss when this should be adjusted?
@@ -41,10 +42,10 @@ conda activate qiime2
 
 ## Denoising 
 - Sequences can be denoised using qiime, which calls the R package 'dada2'. Denoising learns the error rate from the base call quality of the samples, and tries to fix sequencing errors when possible. 
-- Read pairs are merged into a single sequence when they sufficiently overlap and align. The ```--p-min-overlap``` is set to 12 by default. 
+- Read pairs are merged into a single sequence when they sufficiently overlap and align. The ```--p-min-overlap``` is set to 12 by default. Larger amplicons may be running into <12 overlap
 - Denoising output is another qiime object that contains a table of the counts for each unique sequence (called ASVs, rows of table) found among the samples (columns, each sample name taken from the fastqs). The ASV sequences and the ASV ids are stored in the 'rep-seqs.qza'. The table of counts for each ASV is stored in the 'feat-table.qza' file. Both objects can be exported to a human readable format (FASTA) to visually inspect the sequences and tables. Or, qiime has a number of summary functions that can be applied to the qza files. Qiime summaries and plots can be viewed [here](https://view.qiime2.org)
 
-#### Input: samples.fq.gz
+#### Input: Directory of fastq.gz files with illuminia naming scheme
 #### Output: rep-seqs.qza (ASVs) and feature-table.qza (per sample ASV counts)
 
 ## Taxonomy assignment 
