@@ -4,7 +4,8 @@ Differences to discuss:
 - Specifying multiple forward/reverse primers vs primer pair with wobble for rbcl
 - Choosing the ```--p-trunc-len-f``` and ```--p-trunc-len-r``` from the quality plots. This step has the potential to impact results across workflows/users. 
     - Truncating too short --> reads will not merge up. 
-    - Truncating too long --> more ASVs due to more sequencing errors at ends of reads.    
+    - Truncating too long --> more ASVs due to more sequencing errors at ends of reads. 
+- Minimum overlap ```--p-min-overlap``` at denoising will 
 
 To do:
 - add diat.barcode tree and reference database 
@@ -39,6 +40,7 @@ conda activate qiime2
     --p-front-r CCTTCTAATTTACCWACWACTG
     --p-front-r CCTTCTAATTTACCWACAACAG
 ```
+SCCWRP uses:
 
 ## Denoising 
 - Sequences can be denoised using qiime, which calls the R package 'dada2'. Denoising learns the error rate from the base call quality of the samples, and tries to fix sequencing errors when possible. 
