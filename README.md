@@ -1,7 +1,6 @@
-# eDNA-metabarcoding-intro
+# Metabarcoding algae from rbcl (methods comparison)
 
 This is an introduction analyzing eDNA metabarcoding samples to evaluate diversity, assign taxonomy, and differential abundance testing. Taxonomy assignments are compared between vsearch (qiime), command line BLAST, and Tronko (a recent phylogenetic approach to taxonomy assignment).   
-
 
 ## Duplicate my qiime conda env
 conda env create -f qiime2-env.yml  
