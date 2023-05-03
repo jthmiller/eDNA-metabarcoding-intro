@@ -36,9 +36,10 @@ Qiime object taxonomy: ref-dbs/
 Qiime object sequences: ref-dbs/
 
 ##### Tronko (code/tronko_tax.sh)
-See installation instructions for tronko [here](https://github.com/lpipes/tronko). The reference database of rbcl for tronko was built from [diat.barcode](https://github.com/fkeck/diatbarcode) with [this](script for building): 
-Tree: ref-dbs/rbcl_diat.barcode-ref-tree.txt
-FASTA: ref-dbs/rbcl_diat.barcode-MSA.fasta
+- See installation instructions for tronko [here](https://github.com/lpipes/tronko). 
+- The reference database of rbcl for tronko was built from [diat.barcode](https://github.com/fkeck/diatbarcode) with [this](script for building): 
+    - Tree: ref-dbs/rbcl_diat.barcode-ref-tree.txt
+    - FASTA: ref-dbs/rbcl_diat.barcode-MSA.fasta
 
 #### Visualizing the taxonomy assignments
 - Qiime2 can generate helpful interactive barplots of the taxa abundance for sample 
