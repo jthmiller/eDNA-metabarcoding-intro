@@ -5,8 +5,7 @@ Differences to discuss:
 - Choosing the ```--p-trunc-len-f``` and ```--p-trunc-len-r``` from the quality plots. This step has the potential to impact results across workflows/users. 
     - Truncating too short --> reads will not merge up. 
     - Truncating too long --> more ASVs due to more sequencing errors at ends of reads.  
-
-to do:
+To do:
 - add diat.barcode tree and reference database 
 - add qiime2 and tronko taxonomy assignment workflow
 - add sample dataset for compare Susie/Jeff workflow
