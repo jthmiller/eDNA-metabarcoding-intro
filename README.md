@@ -10,7 +10,7 @@ To do:
 - add diat.barcode tree and reference database 
 - add qiime2 and tronko taxonomy assignment workflow
 - add sample dataset for compare Susie/Jeff workflow
-    - The fastqs will need to be provided 
+    - The fastqs will need to be provided via google drive or other 
 
 ### methods comparison
 Pipeline for evaluating diversity, assigning taxonomy, and differential abundance testing of algae samples with rbcl amplicons (vers) with the diat.barcode reference database. Raw sequence data is processed to ASVs with DADA/Qiime2. Taxonomy assignments are compared between vsearch (Qiime2), command line BLAST, and Tronko (a recent phylogenetic approach to taxonomy assignment). The conda environment for the pipeline is [here](qiime2-env.yml)   
