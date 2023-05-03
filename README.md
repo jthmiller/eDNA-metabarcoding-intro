@@ -27,8 +27,8 @@ conda activate qiime2
 - Qiime also calls the program [cutadapt](web address) filter out reads that do not have the primer sequence, and to trim off the sequences from reads that do. 
 
 #### How do our pipelines differ?
-[] The default threshold for filtering reads without the primer site ```--p-error-rate``` is 0.1. Discuss when this should be adjusted?
-[] The rbcl primer set that we use has multiple forward and reverse primers, as well as degenerate bases. Jeff's pipeline specifies these in the cutadapt step with:
+- The default threshold for filtering reads without the primer site ```--p-error-rate``` is 0.1. Discuss when this should be adjusted?
+- The rbcl primer set that we use has multiple forward and reverse primers, as well as degenerate bases. Jeff's pipeline specifies these in the cutadapt step with:
 
 ```
     --p-front-f AGGTGAAGTAAAAGGTTCWTACTTAAA
