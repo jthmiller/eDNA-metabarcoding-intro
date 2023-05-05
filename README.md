@@ -182,7 +182,7 @@ qiime taxa barplot \
  ## For CYANO only
  # Classify rep seqs
 qiime feature-classifier classify-sklearn \
---i-classifier /tmp/gen711_project_data/cyano/16s_sklearn_all-taxonomy.qza \
+--i-classifier /tmp/gen711_project_data/cyano/classifier_16S_V4-V5.qza \
 --i-reads <output path>/rep-seqs.qza \
 --o-classification <output path>/
     
