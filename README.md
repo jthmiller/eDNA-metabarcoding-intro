@@ -220,6 +220,12 @@ qiime taxa barplot \
      --o-visualization my-barplot.qzv
 ```
 
+```
+qiime feature-table filter-samples \
+  --i-table feature_table.qza \
+  --m-metadata-file metadata.tsv \
+  --o-filtered-table new_samples_table.qza
+```
 
 ## 7. Phylogenetic placement of ASVs
 
