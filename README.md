@@ -24,6 +24,8 @@ This is an introduction analyzing eDNA metabarcoding samples to evaluate diversi
 4. Cyanobacteria
 ```
 /tmp/gen711_project_data/cyano/fastqs
+
+## 
 ```
 or, your choice (ok with us to make sure it is feasible)
 
@@ -175,6 +177,15 @@ qiime taxa barplot \
      --i-table <output path>/feature_table-2.qza \
      --i-taxonomy <output path>/FMT-taxonomy.qza \
      --o-visualization <output path>/barplot-2.qzv
+
+
+ ## For CYANO only
+ # Classify rep seqs
+qiime feature-classifier classify-sklearn \
+--i-classifier /tmp/gen711_project_data/cyano/16s_sklearn_all-taxonomy.qza \
+--i-reads <output path>/rep-seqs.qza \
+--o-classification <output path>/
+    
 ```
 
 Here is what is needed for all other datasets:
