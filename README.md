@@ -209,7 +209,17 @@ qiime taxa barplot \
 
 ```
 
-If you get here 4/28, you can stop.
+#### Metadata and background info
+Each project has a metadata file that contains info about each sample- such as the lake the sample came from, or whether the sample came from a 'stool' sample or a sample collected by 'swab' (as in the FMT). We use this info to make comparisons for the results. To include this in your
+
+```
+qiime taxa barplot \
+     --i-table feature_table-1.qza \
+     --m-metadata-file sample-metadata.tsv
+     --i-taxonomy taxonomy.qza \
+     --o-visualization my-barplot.qzv
+```
+
 
 ## 7. Phylogenetic placement of ASVs
 
