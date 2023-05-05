@@ -201,6 +201,8 @@ qiime feature-classifier classify-consensus-vsearch \
   --p-threads 36 \
   --o-classification <output path>/taxonomy.qza
 
+
+
 ### Barplot 
 qiime taxa barplot \
      --i-table <output path>/feature_table-1.qza \
