@@ -215,7 +215,7 @@ Each project has a metadata file that contains info about each sample- such as t
 ```
 qiime taxa barplot \
      --i-table feature_table-1.qza \
-     --m-metadata-file sample-metadata.tsv
+     --m-metadata-file sample-metadata.tsv \
      --i-taxonomy taxonomy.qza \
      --o-visualization my-barplot.qzv
 ```
