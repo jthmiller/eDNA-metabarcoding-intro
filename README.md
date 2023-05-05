@@ -63,7 +63,7 @@ Steps:
 conda activate genomics
 
 ### To run any of the qiime commands
-conda activate qiime2-2022.8
+conda activate qiime2-2021.4
 ```
 Once you've activated an environment, it should be listed on your command line instead of 'base'. See the example below.
 ```
