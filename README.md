@@ -2,30 +2,43 @@
 
 This is an introduction analyzing eDNA metabarcoding samples to evaluate diversity, assign taxonomy, and differential abundance testing. Taxonomy assignments are compared between vsearch (qiime), command line BLAST, and Tronko (a recent phylogenetic approach to taxonomy assignment).   
 
-1. Metabarcoding to compare fish species across US estuaries.
+1. Metabarcoding to compare (fish) species across US estuaries.
 ```
+## Fastqs
 /tmp/gen711_project_data/fish/fastqs
+## Metadata
+/tmp/gen711_project_data/fish/metadata.tsv
+## Fastp shell script
+/tmp/gen711_project_data/fastp.sh
 ```
 2. Metabarcoding of Algae (Diatoms) using rbcl to compare high and low quality streams.
 ```
+## Fastqs
 /tmp/gen711_project_data/algae/fastqs
+## Metadata
+/tmp/gen711_project_data/algae/metadata.tsv
+## Fastp shell script
+/tmp/gen711_project_data/fastp.sh
+
 ```
 3. Fecal microbiota transplant (FMT) study. Metabarcoding of human guts.
 ```
+## Fastqs
 /tmp/gen711_project_data/FMT_3/fmt-tutorial-demux-2
 /tmp/gen711_project_data/FMT_3/fmt-tutorial-demux-1
-
-/tmp/gen711_project_data/fastp-single.sh
-
-### Here is the new metadata for the FMT study
+## Metadata
 /tmp/gen711_project_data/FMT_3/sample-metadata.tsv
-
+## Script to run fastp
+/tmp/gen711_project_data/fastp-single.sh
 ```
 4. Cyanobacteria
 ```
+## Fastqs
 /tmp/gen711_project_data/cyano/fastqs
-
-## 
+## Script to run fastp 
+/tmp/gen711_project_data/fastp.sh
+## Metadata
+/tmp/gen711_project_data/cyano/metadata.tsv
 ```
 or, your choice (ok with us to make sure it is feasible)
 
@@ -90,7 +103,8 @@ The fastp script need 3 things:
 3. the directory that you will store the reads in
 
 ```
-<path to github directory>/fastp.sh <1.poly-g length> <1.path to fastq directory>  <3.path to your output directory>
+### For cyano, fish, and algae 
+<path to github directory>/fastp.sh 150 <1.path to fastq directory>  <3.path to your output directory>
 
 ### For the FMT study
 <path to github directory>/fastp-single.sh 120 <1.path to fastq directory>  <3.path to your output directory>
@@ -104,6 +118,7 @@ qiime tools import \
    --input-path <path to your output directory of trimmed fastqs> \
    --output-path <path to an output directory>/<a name for the output files> \
 ```
+If you are doing the FMT study, you will need to do this twice- once for each input directory. Name the file output different names (with the --output-path option) 
 
 3. Using the primer sequence, qiime's 'cutadapt' plugin removes the primer and adapters of each pair of sequences. You need to select the correct primers to provide qiime and cutadapt. A second 'qza' output file is created for the cutadapt trimmed data. Name it something that makes sense and add the 'qza' extension, so the output path should look something like: /path/to/your/output/directory/cutadapt-sequences.qza. Run the 'demux summarize' on this file to make a summary.qzv file to view later. For the FMT study, you will run the command twice (once for 'demux-1.qza' and once for 'demux-2.qza'). Name the outputs something like cutadapt-sequences-1.qza and cutadapt-sequences-2.qza.
 
@@ -130,9 +145,9 @@ qiime demux summarize \
 
 Remember: the input for many of these commands is the output from the previous command. In the example below, the input '--i-demultiplexed-seqs <output path>/cutadapt-sequences-1.qza' is indicated by the '--i' part. This file was the output that you made with qiime cutadapt above with '--o-trimmed-sequences <output path>/cutadapt-sequences-1.qza'
 
-The trunclenf and trunclenr can be found in the same file that you found the primer sequences [here](primer-list.md)
+The trunclenf and trunclenr can be found in the same file that you found the primer sequences [here](primer-list.md). The truclenf and trunclenr are different for each of the projects (see primer list)
 
-For the FMT study, this is the last step that you will need to run twice.
+For the FMT study, this is the last step that you will need to run twice and generate 2 rep seqs and feature table files.
 ```
 qiime dada2 denoise-paired \
     --i-demultiplexed-seqs <output path>/cutadapt-sequences-1.qza  \
@@ -155,32 +170,38 @@ qiime feature-table tabulate-seqs \
 ```
 
 ## Taxonomy assignment 
-- Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between primer and reference databases. This is the step that finally gets easier for the FMT compared to the other datasets. Here is how you assign taxonomy on the FMT dataset
+- Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between primer and reference databases. This is the step that finally gets easier for the FMT compared to the other datasets. Here is how you assign taxonomy on the FMT dataset.
 ```
-## For FMT only
+## For FMT, merge rep-seqs
 qiime feature-table merge-seqs \
     --i-data <output path>/rep-seqs-1.qza
    --i-data <output path>/rep-seqs-2.qza \
-   --o-merged-data <output path>/merged.rep-seqs.qza
+   --o-merged-data <output path>/rep-seqs.qza
 
+## For FMT, merge feature tables
+qiime feature-table merge \
+  --i-tables <output path>/feature_table-1.qza \
+  --i-tables <output path>/feature_table-2.qza \
+  --o-merged-table results/feature_table.qza
+```
+
+### FMT taxononmy classification
+Then, classify them...
+```
 qiime feature-classifier classify-sklearn \
   --i-classifier /tmp/gen711_project_data/reference_databases/classifier.qza \
-  --i-reads <output path>/merged.rep-seqs.qza \
-  --o-classification <output path>/FMT-taxonomy.qza
+  --i-reads <output path>/rep-seqs.qza \
+  --o-classification <output path>/taxonomy.qza
 
 qiime taxa barplot \
-     --i-table <output path>/feature_table-1.qza \
+     --i-table <output path>/feature_table.qza \
      --i-taxonomy <output path>/FMT-taxonomy.qza \
-     --o-visualization <output path>/barplot-1.qzv
+     --o-visualization <output path>/barplot.qzv
+```
 
-qiime taxa barplot \
-     --i-table <output path>/feature_table-2.qza \
-     --i-taxonomy <output path>/FMT-taxonomy.qza \
-     --o-visualization <output path>/barplot-2.qzv
-
-
- ## For CYANO only
- # Classify rep seqs
+## For CYANO only
+# Classify rep seqs
+```
 qiime feature-classifier classify-sklearn \
 --i-classifier /tmp/gen711_project_data/cyano/classifier_16S_V4-V5.qza \
 --i-reads <output path>/rep-seqs.qza \
@@ -188,7 +209,8 @@ qiime feature-classifier classify-sklearn \
     
 ```
 
-Here is what is needed for all other datasets:
+
+Here is what is needed for fish and algae:
 
 ```
 qiime feature-classifier classify-consensus-vsearch \
@@ -201,33 +223,34 @@ qiime feature-classifier classify-consensus-vsearch \
   --p-threads 36 \
   --o-classification <output path>/taxonomy.qza
 
-
-
 ### Barplot 
 qiime taxa barplot \
-     --i-table <output path>/feature_table-1.qza \
+     --i-table <output path>/feature_table.qza \
      --i-taxonomy <output path>/taxonomy.qza \
      --o-visualization <output path>/my-barplot.qzv
 
 ```
 
 #### Metadata and background info
-Each project has a metadata file that contains info about each sample- such as the lake the sample came from, or whether the sample came from a 'stool' sample or a sample collected by 'swab' (as in the FMT). We use this info to make comparisons for the results. To include this in your
-
-```
-qiime taxa barplot \
-     --i-table feature_table-1.qza \
-     --m-metadata-file sample-metadata.tsv \
-     --i-taxonomy taxonomy.qza \
-     --o-visualization my-barplot.qzv
-```
+Each project has a metadata file that contains info about each sample- such as the lake the sample came from, or whether the sample came from a 'stool' sample or a sample collected by 'swab' (as in the FMT). We use this info to make comparisons for the results. To include this in your barplots, re-run the barplot command from above, and include the '--m-metadata-file' optional input.
 
 ```
 qiime feature-table filter-samples \
   --i-table feature_table.qza \
   --m-metadata-file metadata.tsv \
-  --o-filtered-table new_samples_table.qza
+  --o-filtered-table feature_table_filtered.qza
+
+qiime taxa barplot \
+     --i-table feature_table_filtered.qza \
+     --m-metadata-file sample-metadata.tsv \
+     --i-taxonomy taxonomy.qza \
+     --o-visualization filtered-barplot.qzv
 ```
+
+
+
+
+
 
 ## 7. Phylogenetic placement of ASVs
 
