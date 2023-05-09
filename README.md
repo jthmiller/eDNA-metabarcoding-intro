@@ -247,12 +247,77 @@ qiime taxa barplot \
      --o-visualization filtered-barplot.qzv
 ```
 
+## 7. Diversity analysis and phylogenetic placement of ASVs
+You can stop with the barplots, and try to interpret effect
+
+or 
+
+You can try to 
+
+
+```
+#### Filtered phylogenetic tree
+qiime phylogeny align-to-tree-mafft-fasttree \
+  --i-sequences rep-seqs.qza \
+  --o-alignment alignments \
+  --o-masked-alignment masked-alignment \
+  --o-tree unrooted-tree \
+  --o-rooted-tree rooted-tree \
+  --p-n-threads 4
+
+ same as barplot metadata
+qiime diversity core-metrics-phylogenetic \
+  --i-phylogeny rooted-tree.qza \
+  --i-table feature_table.qza \
+  --p-sampling-depth 1500 \
+  --m-metadata-file metadata.tsv  \
+  --p-n-jobs-or-threads
+  --output-dir core-metrics
+```
+
+## The command above creates 'core-metrics' folder. If you need to re-run it, you might need to remove the core-metrics folder to do so. be careful with 'rm', you could delete your whole home directory (and that is why we make scripts and store things at githb). To remove the 'core-metrics' folder run only:
+```
+rm -fR core-metrics/
+```
+
+The commands below will give you a bunch of plots to view at 'qiime-view.org', including PCAs (as we went over in class) and boxplots to compare between treatments. I'd highly reccommend trying to run these commands on your data for more results to talk about in your presentation. 
+
+```
+qiime feature-table relative-frequency \
+  --i-table core-metrics/rarefied_table.qza \
+  --o-relative-frequency-table core-metrics/relative_rarefied_table
+
+qiime diversity pcoa-biplot \
+  --i-features core-metrics/relative_rarefied_table.qza \
+  --i-pcoa core-metrics/unweighted_unifrac_pcoa_results.qza \
+  --o-biplot core-metrics/unweighted_unifrac_pcoa_biplot
+
+qiime emperor biplot \
+  --i-biplot core-metrics/unweighted_unifrac_pcoa_biplot.qza \
+  --m-sample-metadata-file metadata.tsv \
+  --o-visualization core-metrics/unweighted_unifrac_pcoa_biplot
+```
+
+
+### 
+```
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity core-metrics/shannon_vector.qza \
+  --m-metadata-file metadata.tsv \
+  --o-visualization core-metrics/alpha-group-significance
+
+qiime diversity beta-group-significance \
+  --i-distance-matrix core-metrics/unweighted_unifrac_distance_matrix.qza \
+  --m-metadata-file metadata.tsv \
+  --m-metadata-column <column_in_metadata_that_groups_replicates>  \
+  --p-pairwise \
+  --o-visualization core-metrics/unweighted_unifrac-beta-group-significance
+```
 
 
 
 
 
-## 7. Phylogenetic placement of ASVs
 
 ![plot](plots/jplace.png)
 
