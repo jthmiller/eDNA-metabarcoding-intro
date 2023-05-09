@@ -299,7 +299,7 @@ qiime emperor biplot \
 ```
 
 
-### 
+### Very helpful interactive diversity comparison plots
 ```
 qiime diversity alpha-group-significance \
   --i-alpha-diversity core-metrics/shannon_vector.qza \
@@ -314,7 +314,8 @@ qiime diversity beta-group-significance \
   --o-visualization core-metrics/unweighted_unifrac-beta-group-significance
 ```
 
-
+![plot](plots/alpha-sig.png)
+![plot](plots/beta-sig.png)
 
 
 
