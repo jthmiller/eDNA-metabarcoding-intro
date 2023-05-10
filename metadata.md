@@ -1,5 +1,7 @@
 
  ## FMT   
+
+For more information on this data, see: https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-016-0225-7
 sequencing-run run1, run2 
 sample-type   stool, swab  
 treatment-group treatment, control
