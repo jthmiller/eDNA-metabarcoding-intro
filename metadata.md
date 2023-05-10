@@ -18,13 +18,13 @@ weight  100, 113, 165, 242, 50, 56, 63, 70, 80
 height  50, 51, 51.5, 53, 55, 57, 61, 65, 70
 bmi 14.8-24
 
-References to consider:
+References to consider (google terms such as 'fecal microbiome transfer'):
 For more information on this data, see: https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-016-0225-7
 
 ## Cyano 
 We don't know if it is the large or small (picocyanobacteria) cyanobacteria that make all the poisonous toxins in a harmful cyanobacteria bloom. This study targets eDNA of bacteria (the 16s metabarcoding locus) in water samples taken from a lake in a bloom. The study compares a filteration method (Sample_Methods: <5, to target picocyanobacteria) to whole lake water (large cyanobacteria) and surface water (BFC, bloomforming cyanobacteria, the stuff at the surface) water samples during a cyanobacteria bloom. 
 
-References to consider:
+References to consider (google terms such as picocyanobacteria eDNA metabarcoding):
 https://www.sciencedirect.com/science/article/pii/S1568988322000166
 https://academic.oup.com/femsec/article/97/7/fiab075/6294907
 
@@ -35,6 +35,9 @@ Important metadata columns:
 This is a simple study comparing fish species (mifish locus, or 12s metabarcoding) in the lamprey river (LR), Oyster River (OR), and the Squamscott River (SQ). Why might the number of species (diversity) be different in these location of the Great Bay watershed? Look up news on the rivers, and see if anything might explain the differeces in fish species between them. 
 site: LR, OR, SQ
 
+References to consider (google terms such as 'mifish metabarcoding', 'eDNA fish monitoring'):
+https://www.nature.com/articles/srep40368
+https://www.sciencedirect.com/science/article/pii/S2772735122000038
 
 ## Algae
 This study is searching for diatom species that can be used as indicators of stream health. Rather than look for the species of diatoms with microscopes, we are hoping to find indicator species with eDNA (rbcl metabarcoding locus).
@@ -42,7 +45,7 @@ This study is searching for diatom species that can be used as indicators of str
 Do samples group (in PCA) according 
 Important metadata columns:
 
-References to consider:
+References to consider (google terms such as diatom metabarcoding, bioindicators, eDNA):
 https://www.frontiersin.org/articles/10.3389/fevo.2019.00409/full
 
 more to come on this ... 
