@@ -1,8 +1,5 @@
 
  ## FMT   
-
-For more information on this data, see: https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-016-0225-7
-
 The text below was lifted from the FMT tutorial: https://docs.qiime2.org/2022.2/tutorials/fmt/
 
 The data used in this tutorial is derived from a Fecal Microbiome Transplant study where children under the age of 18 with autism and gastrointestinal disorders, as measured by the Autism Diagnostic Interview-Revised (ADI-R) and Gastrointestinal Symptom Rating Scale (GSRS), respectively, were treated with fecal microbiota transplant in attempt to reduce the severity of their behavioral and gastrointestinal symptoms. We tracked changes in their microbiome, several metrics of the severity of autism including the Parent Global Impressions-III (PGI-III) and the Childhood Autism Rating Scale (CARS), and the severity of their gastrointestinal symptoms through their GSRS score over an eighteen week period. The microbiome was tracked through collection of weekly fecal swab samples (collected by swabbing used toilet paper) and less frequent stool samples (collected as whole stool). In the full study, which was a phase 1 clinical trial designed to test safety of the treatment, eighteen individuals received the treatment, and twenty individuals were followed as controls. The controls did not receive the treatment, but were monitored to track normal temporal variation in the gut microbiome. The fecal material that was transplanted during treatment was also sequenced in this study.
@@ -21,8 +18,15 @@ weight  100, 113, 165, 242, 50, 56, 63, 70, 80
 height  50, 51, 51.5, 53, 55, 57, 61, 65, 70
 bmi 14.8-24
 
+References to consider:
+For more information on this data, see: https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-016-0225-7
+
 ## Cyano 
 We don't know if it is the large or small (picocyanobacteria) cyanobacteria that make all the poisonous toxins in a harmful cyanobacteria bloom. This study targets eDNA of bacteria (the 16s metabarcoding locus) in water samples taken from a lake in a bloom. The study compares a filteration method (Sample_Methods: <5, to target picocyanobacteria) to whole lake water (large cyanobacteria) and surface water (BFC, bloomforming cyanobacteria, the stuff at the surface) water samples during a cyanobacteria bloom. 
+
+References to consider:
+https://www.sciencedirect.com/science/article/pii/S1568988322000166
+https://academic.oup.com/femsec/article/97/7/fiab075/6294907
 
 Important metadata columns:
  Sample_Method: <5, BFC, WLW 
@@ -38,5 +42,7 @@ This study is searching for diatom species that can be used as indicators of str
 Do samples group (in PCA) according 
 Important metadata columns:
 
+References to consider:
+https://www.frontiersin.org/articles/10.3389/fevo.2019.00409/full
 
 more to come on this ... 
