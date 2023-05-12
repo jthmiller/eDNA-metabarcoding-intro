@@ -1,5 +1,5 @@
 # Metadata
-For most projects below, I would reccommend downloading the metadata file to open it up in excel. It will be easier to read that way
+For most projects below, I would recommend downloading the metadata file to open it up in excel. It will be easier to read that way. Also- you can download the data that is used to visualize the barplots by clicking 'download csv' in the top left corner of the qiime view window of your barplot. If you are more comfortable with looking at data in excel, I'd recommend doing this.
 
 ## FMT   
 The text below was lifted from the FMT tutorial: https://docs.qiime2.org/2022.2/tutorials/fmt/
@@ -47,14 +47,23 @@ This study is searching for diatom species that can be used as indicators of str
 Do samples group (in PCA) according 
 Important metadata columns:
 Latitude, Longitude - Compare species diversity or abundance as an effect of lat long
-DIST_Cat - Disturbance category. Use this to see if there are difference in samples that come from  
+DIST_Cat - Disturbance category. Use this to see if there are difference in samples (either diversity or taxonomic groups) that come from different levels of stress (disturbance categories). Stressors could be: farms along the stream, or parking lot runoff, ect. 
+
+Ordered from no stress to the most stressed is: 
+BestRef - Best reference site. No disturbance/stress
+SubRef - Almost as untouched as BestRef, but 
+SomeStrs - Some stream stressors present  
+Strs - Stressed
+HighStrs - Very high level of stress
+
+Example questions:
+What groups are more abundant in BestRef vs HighStrs?
+
 
 References to consider (google terms such as diatom metabarcoding, bioindicators, eDNA):
 https://www.frontiersin.org/articles/10.3389/fevo.2019.00409/full
 
-
-
-#SampleID
+List of metadata columns
 Run
 Renamed
 Sample
