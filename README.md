@@ -269,7 +269,7 @@ qiime phylogeny align-to-tree-mafft-fasttree \
 qiime diversity core-metrics-phylogenetic \
   --i-phylogeny rooted-tree.qza \
   --i-table feature_table.qza \
-  --p-sampling-depth 1500 \
+  --p-sampling-depth 500 \
   --m-metadata-file metadata.tsv  \
   --p-n-jobs-or-threads
   --output-dir core-metrics

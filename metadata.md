@@ -1,5 +1,7 @@
+# Metadata
+For most projects below, I would reccommend downloading the metadata file to open it up in excel. It will be easier to read that way
 
- ## FMT   
+## FMT   
 The text below was lifted from the FMT tutorial: https://docs.qiime2.org/2022.2/tutorials/fmt/
 
 The data used in this tutorial is derived from a Fecal Microbiome Transplant study where children under the age of 18 with autism and gastrointestinal disorders, as measured by the Autism Diagnostic Interview-Revised (ADI-R) and Gastrointestinal Symptom Rating Scale (GSRS), respectively, were treated with fecal microbiota transplant in attempt to reduce the severity of their behavioral and gastrointestinal symptoms. We tracked changes in their microbiome, several metrics of the severity of autism including the Parent Global Impressions-III (PGI-III) and the Childhood Autism Rating Scale (CARS), and the severity of their gastrointestinal symptoms through their GSRS score over an eighteen week period. The microbiome was tracked through collection of weekly fecal swab samples (collected by swabbing used toilet paper) and less frequent stool samples (collected as whole stool). In the full study, which was a phase 1 clinical trial designed to test safety of the treatment, eighteen individuals received the treatment, and twenty individuals were followed as controls. The controls did not receive the treatment, but were monitored to track normal temporal variation in the gut microbiome. The fecal material that was transplanted during treatment was also sequenced in this study.
@@ -44,8 +46,83 @@ This study is searching for diatom species that can be used as indicators of str
 
 Do samples group (in PCA) according 
 Important metadata columns:
+Latitude, Longitude - Compare species diversity or abundance as an effect of lat long
+DIST_Cat - Disturbance category. Use this to see if there are difference in samples that come from  
 
 References to consider (google terms such as diatom metabarcoding, bioindicators, eDNA):
 https://www.frontiersin.org/articles/10.3389/fevo.2019.00409/full
 
-more to come on this ... 
+
+
+#SampleID
+Run
+Renamed
+Sample
+State
+Year
+class
+Sample_Site
+Collected_Date
+WaterbodyName
+Latitude
+Longitude
+COMID_Final
+US_L4CODE
+US_L3CODE
+DIST_Cat
+Sc_ICWI
+Sc_PctUrb
+Sc_PctAg
+Sc_AllAgN
+Sc_RdDens
+Sc_DamNrmStor
+CatAreaSqKm
+WsAreaSqKm
+BFICat
+ElevCat
+Na2OCat
+Al2O3Cat
+CaOCat
+Fe2O3Cat
+SiO2Cat
+MgOCat
+SCat
+P2O5Cat
+K2OCat
+NCat
+HydrlCondCat
+CompStrgthCat
+ICI_v2_1
+PctImp2019Cat
+AgKffactCat
+KffactCat
+PctGlacTilCrsCat
+SN_2008Cat
+NO3_2008Cat
+InorgNWetDep_2008Cat
+NH4_2008Cat
+PctUrban2019Cat
+PctForest2019Cat
+PctAg2019Cat
+PctWetland2019Cat
+PctHay2019Cat
+PctCrop2019Cat
+NsurpCat
+NANICat
+PrecipCat
+TmaxCat
+TmeanCat
+TminCat
+MSST_Avg
+RockNCat
+RunoffCat
+ClayCat
+SandCat
+WtDepCat
+OmCat
+PermCat
+RckDepCat
+sw_fluxCat
+WaterInputCat
+wdrw_LDCat
+WetIndexCat
