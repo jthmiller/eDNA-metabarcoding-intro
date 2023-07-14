@@ -16,12 +16,12 @@ Steps:
 5. Start here next week's lab
 
 ## Before you can run programs like fastp and qiime, create a conda environment with all the necessary applications
-Note: Provide a link to my conda qiime env 
+[Here](https://github.com/jthmiller/eDNA-metabarcoding-intro/blob/mifish-intro/qiime2-env.yml) is a link to a qiime environment that I use. If you do not have conda or miniconda installed, follow [these](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) instructions.
 ```
-### To run fastp for trimming
-conda activate genomics
-
-### To run any of the qiime commands
+conda env create -f qiime2-env.yml
+```
+### Once the conda environment is installed, activate it with:
+```
 conda activate qiime2-2021.4
 ```
 Once you've activated an environment, it should be listed on your command line instead of 'base'. See the example below.
