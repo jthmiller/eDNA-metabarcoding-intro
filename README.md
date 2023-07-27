@@ -17,45 +17,31 @@ To do:
 ### Overview of pipeline
 This repo is to compare pipelines for evaluating diversity, assigning taxonomy, and differential abundance testing on environmental algae samples and rbcl amplicons (vers). The pipeline uses the [diat.barcode](https://www.nature.com/articles/s41598-019-51500-6) reference database. Raw sequence data is processed to ASVs with DADA/Qiime2. Taxonomy assignments are compared between vsearch in [Qiime2](https://qiime2.org), command line BLAST, and [Tronko](https://github.com/lpipes/tronko) (a recent phylogenetic approach to taxonomy assignment). The conda environment for the pipeline is [here](qiime2-env.yml)   
 
-## Duplicate the qiime conda environment
-```
-conda env create -f qiime2-env.yml  
-conda activate qiime2  
-```
-
 ## FASTQ sample QA/QC
 
-- The 2-color chemistry of recent illumina sequencing platforms results in long, poly-g tails added to sequenced fragments that are less than 250-bp ling. Fastp can trim off the poly-G tails reads and toss those that are below a threshold (usually the primer-dimer reads that are trimmed to ~75-bp or so)
-- Qiime imports the directory of poly-G trimmed FASTQ files into a single 'qiime file' with the 'qza' extension. Using the primer sequence, qiime's 'cutadapt' plugin removes the primer and adapters of each pair of sequences. A second 'qza' output file is created for the cutadapt trimmed data.
-- Qiime also calls the program [cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) filter out reads that do not have the primer sequence, and to trim off the sequences from reads that do. 
+- The 2-color chemistry of recent illumina sequencing platforms results in long, poly-g tails added to sequenced fragments that are less than 250-bp ling. Fastp can trim off the poly-G tails reads and toss those that are below a threshold (usually the primer-dimer reads that are trimmed to ~75-bp or so). If you are not using Novaseq data, you can skip this step
 
-#### How do our pipelines differ?
-- The default threshold for filtering reads without the primer site ```--p-error-rate``` is 0.1. Discuss when this should be adjusted?
-- The rbcl primer set that we use has multiple forward and reverse primers, as well as degenerate bases. Jeff's pipeline specifies these in the cutadapt step with:
+
+- Qiime imports the directory of demultiplexed FASTQ files (poly-G trimmed FASTQ files if performed) into a single 'qiime file' with the 'qza' extension. Replace '<path>' in the command below with the full path to the directory that holds the demultiplexed FASTQs. Qiime may throw an error if any other files are in the directory. Qiime will recognize FASTQ file naming conventions to determine the name of each sample. The forward and reverse read FASTQs should have the same name, except 'R1' and 'R2' in the names, respectively. Before you import the files, make a directory to hold all of your qiime output called 'out'. The qiime 'artifact' file will be called 'demux.qza' inn the 'out' directory. Qiime can add the '.qza' to the filename for you. This file contains all of the sequences for each sample in the FASTQ directory
 
 ```
-    --p-front-f AGGTGAAGTAAAAGGTTCWTACTTAAA
-    --p-front-f AGGTGAAGTTAAAGGTTCWTAYTTAAA
-    --p-front-f AGGTGAAACTAAAGGTTCWTACTTAAA
-    --p-front-r CCTTCTAATTTACCWACWACTG
-    --p-front-r CCTTCTAATTTACCWACAACAG
-```
-SCCWRP uses:
-
-## Denoising 
-- Sequences can be denoised using qiime, which calls the R package 'dada2'. Denoising learns the error rate from the base call quality of the samples, and tries to fix sequencing errors when possible. 
-- Read pairs are merged into a single sequence when they sufficiently overlap and align. The ```--p-min-overlap``` is set to 12 by default. Larger amplicons may be running into <12 overlap
-- Denoising output is another qiime object that contains a table of the counts for each unique sequence (called ASVs, rows of table) found among the samples (columns, each sample name taken from the fastqs). The ASV sequences and the ASV ids are stored in the 'rep-seqs.qza'. The table of counts for each ASV is stored in the 'feat-table.qza' file. Both objects can be exported to a human readable format (FASTA) to visually inspect the sequences and tables. Or, qiime has a number of summary functions that can be applied to the qza files. Qiime summaries and plots can be viewed [here](https://view.qiime2.org)
-
-```
+mkdir out
 
 qiime tools import \
     --type "SampleData[PairedEndSequencesWithQuality]"  \
     --input-format CasavaOneEightSingleLanePerSampleDirFmt \
     --input-path <path> \
     --output-path out/demux
+```
 
-qiime cutadapt trim-paired \
+
+- Qiime also calls the program [cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html) filter out reads that do not have the primer sequence, and to trim off the sequences from reads that do. Use the primer sequence and the cutadapt plugin to remove the primer sequence and any leftover adapters for each pair.
+
+Read pairs that do not contain the primer sequences are tossed (--p-discard-untrimmed option). View the cutadapt log file to determine what proportions of the read pairs made it through this step. If percentages are low, there may be issues with the primer sequences that you provided, or the sequences were already trimmed during demultiplexing. 
+
+The new 'qza' file is created for the trimmed sequences for all samples. This is the file that will be used for 'denoising'.  
+
+```qiime cutadapt trim-paired \
     --i-demultiplexed-sequences out/demux.qza \
     --o-trimmed-sequences out/demux_cutadapt.qza \
     --p-cores 16 \
@@ -66,12 +52,19 @@ qiime cutadapt trim-paired \
     --p-front-r CCTTCTAATTTACCWACAACAG \
     --p-discard-untrimmed \
     --p-match-adapter-wildcards \
-    --verbose
+    --verbose > out/cutadapt.log 2>&1 
 
-qiime demux summarize \
+ qiime demux summarize \
     --i-data out/demux_cutadapt.qza \
-    --o-visualization out/demux_cutadapt.qzv
+    --o-visualization out/demux_cutadapt
+   
+```
+## Denoising 
+- Sequences can be denoised using qiime, which calls the R package 'dada2'. Denoising learns the error rate from the base call quality of the samples, and tries to fix sequencing errors when possible, and merges read pairs into a single sequence when they sufficiently overlap and align. The ```--p-min-overlap``` is set to 12 by default. Larger amplicons may be running into <12 overlap, so setting this to a number that is too high will result in discarding true amplicon sequences that are too large to overlap by that many basepairs. Setting this too short will result in chimeras.  
 
+- Denoising output is another qiime object that contains a table of the counts for each unique sequence (called ASVs, rows of table) found among the samples (columns, each sample name taken from the fastqs). The ASV sequences and the ASV ids are stored in the 'rep-seqs.qza'. The table of counts for each ASV is stored in the 'feat-table.qza' file. Both objects can be exported to a human readable format (FASTA) to visually inspect the sequences and tables. Or, qiime has a number of summary functions that can be applied to the qza files. Qiime summaries and plots can be viewed [here](https://view.qiime2.org)
+
+```
 qiime dada2 denoise-paired \
     --i-demultiplexed-seqs out/demux_cutadapt.qza  \
     --p-trunc-len-f 175 \
@@ -84,16 +77,6 @@ qiime dada2 denoise-paired \
     --o-representative-sequences out/rep-seqs \
     --verbose > out/Dada2_denoising.log 2>&1
 ```
-
-
-
-
-
-#### Input: Directory of fastq.gz files with illuminia naming scheme
-#### Output: rep-seqs.qza (ASVs) and feature-table.qza (per sample ASV counts)
-
-
-
 
 ## Taxonomy assignment 
 Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between metabarcoding loci and sample composition. Our approach is to run multiple assignment methods.  
