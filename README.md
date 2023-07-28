@@ -79,18 +79,40 @@ qiime dada2 denoise-paired \
 ```
 
 ## Taxonomy assignment 
-Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between metabarcoding loci and sample composition. Our approach is to run multiple assignment methods. Here, we will use a Qiime plugin of, VSEARCH to assign taxonomy to our sequences using a refernce database of sequences with known taxonomy. The reference database of rbcl for Qiime from the diat.barcode database with [this](code/algae_ref_database.sh). After taxonomy assignment, we can generate an interactive barplot to explore the data. In later steps, the code for phylogenetic placement with TRONKO is provided.
+Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between metabarcoding loci and sample composition. Our approach is to run multiple assignment methods. Here, we will use a Qiime plugin of, VSEARCH to assign taxonomy to our sequences using a refernce database of sequences with known taxonomy.  
+
+The reference database of rbcl for Qiime from the diat.barcode database with [this](code/algae_ref_database.sh). After taxonomy assignment, we can generate an interactive barplot to explore the data. 
+
+For each of your ASVs, VESEARCH sorts the reference database using Kmer overlap of the reference sequences and the ASV sequence. 
+
+
+VESEARCH performs well. More recent methods are better. Training a 
+
+In later steps, the code for phylogenetic placement with TRONKO is provided. 
 
 Qiime VSEARCH reference taxonomy: ref-dbs/diat_barcode_v10_263bp-tax.qza
 Qiime VSEARCH reference sequences: ref-dbs/diat_barcode_v10_263bp-seq.qza  
 
-The parameters used for feature-classification (or, assigning taxonomy) can have 
+The optimal parameters used for feature-classification (or, assigning taxonomy) can vary between target locus, reference databases, and other factors. The parameters that play a large role in taxonomic assignment is --p-maxaccepts and --p-perc-identity. Setting --p-maxaccepts too high and --p-perc-identity too low will result in taxonomic assignments (fewer ASVs identified to the species level). Reducing --p-maxaccepts might result in more sequences that are falsely assigned to the species level. Reducing both will result in many ASVs tossed into the 'Unassigned' bin. I reccommemnd starting with the qiime defaults and taking a look at the results. If nothing is assigned to the species level and you have many unassigned ASVs, consider relaxing these parameters. If you are getting all sequences assigned to the species level, consider running with more restrictive parameters (decrease perc-identity and increase number of accepts).
+
 
   --p-maxaccepts 10 \
-  --p-query-cov 0.8 \
   --p-perc-identity 0.8 \
-  --p-threads 12 \
-  --p-weak-id 0.50 \
+
+
+Other important to parameters to consider
+--p-weak-id 0.50 
+  
+  
+    --p-query-cov 1 \ 
+        --p-threads 12 \
+
+
+
+For tophits:
+ --p-top-hits-only True
+ --p-maxaccepts 10
+
 
 ```
 qiime feature-classifier classify-consensus-vsearch \
