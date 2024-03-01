@@ -1223,3 +1223,18 @@ code/qiime2_denoise.sh \
     10 \
     rbcl \
     paired &> data/runlogs/runlog.AlgaeME-rbcLNX031323
+
+## wget -r -np -R "index.html*" --http-user=user --http-password=DfprxERsae https://cobb.sr.unh.edu/managed/220829_A01346_0077_BH5H2KDRX2_16Mer082922_AW_HIDARFC-MF/reads
+code/qiime2_denoise.sh  \
+    HIDARFC-MF-2 \
+    data/hawaii  \
+    raw-data/cobb.sr.unh.edu/managed/220829_A01346_0077_BH5H2KDRX2_16Mer082922_AW_HIDARFC-MF/reads \
+    12 \
+    mitohelper &>> data/runlogs/runlog.HIDARFC-MF-2.out
+
+code/qiime2_denoise.sh  \
+    HIDARFC-MF \
+    data/hawaii \
+    /home/unhAW/jtmiller/watts/raw-data/cobb.sr.unh.edu/managed/220803_A01346_0074_BHGF2VDRX2_16Mer080322_AW_HIDARFC-MF \
+    4 \
+    mitohelper &>> data/runlogs/runlog.HIDARFC-MF
