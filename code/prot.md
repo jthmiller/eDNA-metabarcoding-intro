@@ -155,6 +155,7 @@ nohup qiime phylogeny align-to-tree-mafft-fasttree \
    --p-n-threads 18 &
 ```
 ##### Alpha diversity analysis.
+```
 qiime diversity alpha \
     --i-table filtered-bacteria-table.qza \
     --p-metric shannon \
