@@ -37,11 +37,23 @@ There are 4 dataset options for the eDNA Metabarcoding analysis project.
 or, your choice (ok with us to make sure it is feasible)
 
 ## Before you start...
-For many of the commands below, you will need to replace the text between the < and > symbol with a path and file name. For example, if I made a directory to hold my qiime import output file called 'output' in my home directory, I would replace the '--output-path <path to an output directory>/<a name for the output files>.qza' part with '--output-path /home/unhAW/jtmiller/output/qiime_imported_file.qza' to run the command. 
+For many of the commands below, you will need to replace the text between the < and > symbols with a path and/or file name. When you create a new file, you will use a new name (often when using 'output-path').  
 
-Once the data has been imported into qiime, all the data will be held in one or two files with the '.qza' extension. However, we will also generate some visualizations of the 'qza' files to view at qiime-view.org. We should give these files a '.qzv' extenstion instead (example: see 2nd command of step 3)
+For example, if I made a directory to hold my qiime files called 'output' in my home directory, I would replace this portion of the command 
+```
+--output-path <path to an output directory>/<a name for the output files>.qza
+```
+with this
+```
+--output-path /home/unhAW/jtmiller/output/qiime_imported_file.qza
+```
 
-Make a directory to hold your files like fastqs just outside your github directory (such as trimmed_fastqs). When you run 'ls' from your home directory, it should look something like this: 
+Once all of the fastq files have been imported into qiime, they will all be held in single files with the '.qza' extension. However, we will also generate some visualizations of the 'qza' files to view at qiime-view.org. We should give these files a '.qzv' extenstion instead (example: see 2nd command of step 3)
+
+
+
+## Step 1
+Make a directories to hold your files. Make 'output' and 'fastq' directories just outside your github directory (nammed 'trimmed_fastqs' and 'output' or something similar). When you run 'ls' from your home directory, it should look something like this: 
 ```
 > ls
 github-project-directory    gen711    shell_data   trimmed_fastqs 
