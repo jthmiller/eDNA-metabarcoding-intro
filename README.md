@@ -14,7 +14,7 @@ This is an introduction analyzing eDNA metabarcoding samples to evaluate diversi
 ## Fastp shell script
 /tmp/gen711_project_data/fastp.sh
 ```
-2. Metabarcoding of Algae (Diatoms) using rbcl to compare high and low quality streams.
+2. Metabarcoding of Algae (Diatoms) using rbcl to compare high and low quality streams. This project is interested in using diatom communities to monitor freshwater stream health. Samples were taken in impacted and non-impacted streams and amplified with 16s metabarcoding primers
 ```
 ## Fastqs
 /tmp/gen711_project_data/algae/fastqs
