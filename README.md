@@ -50,14 +50,7 @@ with this
 
 Once all of the fastq files have been imported into qiime, they will all be held in single files with the '.qza' extension. However, we will also generate some visualizations of the 'qza' files to view at qiime-view.org. We should give these files a '.qzv' extenstion instead (example: see 2nd command of step 3)
 
-
-
-## Step 1
-Make a directories to hold your files. Make 'output' and 'fastq' directories just outside your github directory (nammed 'trimmed_fastqs' and 'output' or something similar). When you run 'ls' from your home directory, it should look something like this: 
-```
-> ls
-github-project-directory    gen711    shell_data   trimmed_fastqs 
-```
+## Github
 When you make an output file that you want to download, you can move it into your github project directory, add/upload it to your github repo, and then view/download it from there. 
 
 ```
@@ -70,13 +63,28 @@ If you get an error about the password and token, ask for help. We will help you
 
 ## Overview of pipeline
 Steps:
-1. Run Fastp to trim the 'poly-g' tails of the reads
-2. Import the directory of reads with qiime and save the output in your directory
-3. Use the 'cutadapt' program in qiime to trim off the primers
-4. Start the denoising the reads (removing the low quality reads/bases)
-5. Start here next week's lab
+1. Make directories to hold the files for various steps
+2. Activate the genomics environment
+3. Run Fastp to trim the 'poly-g' tails of the reads
+4. Import the directory of reads with qiime and save the output in your directory
+5. Use the 'cutadapt' program in qiime to trim off the primers
+6. Start the denoising the reads (removing the low quality reads/bases)
+7. Start here next week's lab
 
-## Before you can run programs like fastp and qiime, activate an environment 
+## Step 1: Make directories to hold the files for various steps
+1. Make a directories to hold your files. Make 'output' and 'fastq' directories just outside your github directory (nammed 'trimmed_fastqs' and 'output' or something similar). When you run 'ls' from your home directory, it should look something like this: 
+```
+> ls
+github-project-directory    gen711    shell_data   trimmed_fastqs 
+```
+Be sure to save all the commands (in a shell script text file) that are necessary for re-running your analysis. Therefor, one of your first lines in this script should be:
+```
+mkdir trimmed_fastqs output
+```
+However, you will not need to save the 'ls' command, because that doesn't make/modify any files- it just confirms that it ran correctly. 
+
+## Step 2: Activate the genomics environment
+Before you can run programs like fastp and qiime, activate an environment 
 ```
 ### To run fastp for trimming
 conda activate genomics
@@ -91,8 +99,7 @@ QIIME is caching your current deployment for improved performance. This may take
 (qiime2-2022.8) jtmiller@ron:~$ 
 ```
 
-
-## FASTQ sample QA/QC
+## Step 3: FASTQ sample QA/QC
 1. Fastp is used to trim off the poly-G tail commonly found in amplicon nova-seq data. Run the fastp script by replacing the paths (the first one is to the directory of fastq files to trim, and then the path to your output directory that you made to store the trimmed fastqs). Copy the fastp.sh file to your project directory :
 ```
 cp /tmp/gen711_project_data/fastp.sh <path to github directory>/fastp.sh
@@ -145,6 +152,8 @@ qiime demux summarize \
 --i-data <path to the file from step above> \
 --o-visualization  <path to an output directory>/<a name for the output files>.qzv 
 ```
+
+Remember, you need to replace the text between the <> symbols before it will run. Read the errors if the commmand doesn't run successfully. It helps to copy the error text into your lab notebook.
 
 ## Denoising 
 - Sequences can be denoised using qiime, which calls the R package 'dada2'. Denoising learns the error rate from the base call quality of the samples, and tries to fix sequencing errors when possible. Read pairs are merged into a single sequence when they sufficiently overlap and align. Denoising output is another qiime object that contains a table of the counts for each unique sequence (called ASVs, rows of table) found among the samples (columns, each sample name taken from the fastqs). The ASV sequences and the ASV ids are stored in the 'rep-seqs.qza'. The table of counts for each ASV is stored in the 'feat-table.qza' file. Both objects can be exported to a human readable format (FASTA) to visually inspect the sequences and tables. Or, qiime has a number of summary functions that can be applied to the qza files. Qiime summaries and plots can be viewed [here](https://view.qiime2.org)
