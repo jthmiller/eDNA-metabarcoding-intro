@@ -5,7 +5,7 @@ Final Projects will be graded from each groups's github repo. [Here](https://git
 
 This is an introduction analyzing eDNA metabarcoding samples to evaluate diversity, assign taxonomy, and differential abundance testing. Taxonomy assignments are compared between vsearch (qiime), command line BLAST, and Tronko (a recent phylogenetic approach to taxonomy assignment).   
 
-1. Metabarcoding to compare (fish) species across US estuaries.
+1. Metabarcoding to compare (fish) species across US estuaries. Water from estuaries were filtered for eDNA and amplified with the MiFish 12s primer to compare fish communities between coasts (Gulf, Pacific, Atlantic) and seasons (sampled at 5 sites in 10 different estuaries 4 times per year)  
 ```
 ## Fastqs
 /tmp/gen711_project_data/fish/fastqs
