@@ -5,42 +5,33 @@ Final Projects will be graded from each groups's github repo. [Here](https://git
 
 This is an introduction analyzing eDNA metabarcoding samples to evaluate diversity, assign taxonomy, and differential abundance testing. Taxonomy assignments are compared between vsearch (qiime), command line BLAST, and Tronko (a recent phylogenetic approach to taxonomy assignment).   
 
+There are 4 dataset options for the eDNA Metabarcoding analysis project. 
+
+## Fastqs, metadata, and the fastp shell script for each project can be found
 1. Metabarcoding to compare (fish) species across US estuaries. Water from estuaries were filtered for eDNA and amplified with the MiFish 12s primer to compare fish communities between coasts (Gulf, Pacific, Atlantic) and seasons (sampled at 5 sites in 10 different estuaries 4 times per year)  
+
 ```
-## Fastqs
 /tmp/gen711_project_data/fish/fastqs
-## Metadata
 /tmp/gen711_project_data/fish/metadata.tsv
-## Fastp shell script
 /tmp/gen711_project_data/fastp.sh
 ```
 2. Metabarcoding of Algae (Diatoms) using rbcl to compare high and low quality streams. This project is interested in using diatom communities to monitor freshwater stream health. Samples were taken in impacted and non-impacted streams and amplified with 16s metabarcoding primers
 ```
-## Fastqs
 /tmp/gen711_project_data/algae/fastqs
-## Metadata
 /tmp/gen711_project_data/algae/metadata.tsv
-## Fastp shell script
 /tmp/gen711_project_data/fastp.sh
-
 ```
-3. Fecal microbiota transplant (FMT) study. Metabarcoding of human guts.
+3. Fecal microbiota transplant (FMT) study. This project sequenced stool samples of individuls to determine whether fecal transplants change the microbial gut community of patients that do and do not recieve a transplant. The program that we use to analyze metabarcoding data has a wealth of tutorials for this data. 
 ```
-## Fastqs
 /tmp/gen711_project_data/FMT_3/fmt-tutorial-demux-2
 /tmp/gen711_project_data/FMT_3/fmt-tutorial-demux-1
-## Metadata
 /tmp/gen711_project_data/FMT_3/sample-metadata.tsv
-## Script to run fastp
 /tmp/gen711_project_data/fastp-single.sh
 ```
 4. Cyanobacteria
 ```
-## Fastqs
 /tmp/gen711_project_data/cyano/fastqs
-## Script to run fastp 
 /tmp/gen711_project_data/fastp.sh
-## Metadata
 /tmp/gen711_project_data/cyano/metadata.tsv
 ```
 or, your choice (ok with us to make sure it is feasible)
