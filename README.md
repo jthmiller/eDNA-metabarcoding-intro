@@ -1,4 +1,7 @@
-# eDNA-metabarcoding-guide for gen711/811
+
+# Gen 711 Group Projects, Option 2: eDNA Metabarcoding
+
+Final Projects will be graded from each groups's github repo. [Here](https://github.com/Kale-23/Qiime2_Microbiome_Analysis) is an example of a project that recieved full credit. [Here](https://github.com/jthmiller/gen711-811-example) is a general template to follow. In your repo, be sure to include a file (such as 'analysis.sh') that documents each command you used for the project. 
 
 This is an introduction analyzing eDNA metabarcoding samples to evaluate diversity, assign taxonomy, and differential abundance testing. Taxonomy assignments are compared between vsearch (qiime), command line BLAST, and Tronko (a recent phylogenetic approach to taxonomy assignment).   
 
