@@ -212,14 +212,13 @@ qiime taxa barplot \
      --o-visualization <output path>/barplot.qzv
 ```
 
-## Only do these steps if you are working on the cyano,mifish or algea projects
+## Only do these steps if you are working on the cyano, mifish, or algea projects
 
 ```
 qiime feature-classifier classify-sklearn \
   --i-classifier  <see path to use in the file> \
   --i-reads <output path>/rep-seqs.qza \
   --o-classification <output path>/classify-sklearn-taxonomy
-
 
 ### Barplot 
 qiime taxa barplot \
@@ -246,13 +245,6 @@ qiime taxa barplot \
 ```
 
 ## 7. Diversity analysis and phylogenetic placement of ASVs
-You can stop with the barplots, and try to interpret effect
-
-or 
-
-You can try to 
-
-
 ```
 #### Filtered phylogenetic tree
 qiime phylogeny align-to-tree-mafft-fasttree \
@@ -263,7 +255,7 @@ qiime phylogeny align-to-tree-mafft-fasttree \
   --o-rooted-tree rooted-tree \
   --p-n-threads 4
 
- same as barplot metadata
+## same metadata as barplot steps
 qiime diversity core-metrics-phylogenetic \
   --i-phylogeny rooted-tree.qza \
   --i-table feature_table.qza \
@@ -314,8 +306,4 @@ qiime diversity beta-group-significance \
 
 ![plot](plots/alpha-sig.png)
 ![plot](plots/beta-sig.png)
-
-
-
-
 ![plot](plots/jplace.png)
