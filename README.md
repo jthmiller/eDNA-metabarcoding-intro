@@ -26,8 +26,9 @@ There are 4 dataset options for the eDNA Metabarcoding analysis project.
 /tmp/gen711_project_data/eDNA-fqs/FMT/fmt-tutorial-demux-1.qza
 /tmp/gen711_project_data/eDNA-fqs/FMT/sample-metadata.tsv
 ```
-4. Cyanobacteria 
+4. Cyanobacteria. Water samples were sequenced from different sites around Martha's Vineyard (Egratown Great Pond for example, see metadata) for all cyanobacteria (WLW in metadata), small/piccocyanobacteria (<5), and bloom-forming cyanbobacteria.  
 See [this](metadata/cyano-metadata_salinity.tsv) metadata file for a list of the samples sequenced
+See [this](https://www.scirp.org/journal/paperinformation?paperid=125865) publication on more info about the dataset
 ```
 /tmp/gen711_project_data/cyano/fastqs
 /tmp/gen711_project_data/fastp.sh
