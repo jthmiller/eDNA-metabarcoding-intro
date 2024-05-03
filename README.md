@@ -15,7 +15,7 @@ There are 4 dataset options for the eDNA Metabarcoding analysis project.
 /tmp/gen711_project_data/fish/metadata.tsv
 /tmp/gen711_project_data/fastp.sh
 ```
-2. Metabarcoding of Algae (Diatoms) using rbcl to compare high and low quality streams. This project is interested in using diatom communities to monitor freshwater stream health. Samples were taken in impacted and non-impacted streams and amplified with 16s metabarcoding primers. See [this](metadata/algae-metadata.tsv) metadata file for a list of the samples sequenced
+2. Metabarcoding of Algae (Diatoms) using rbcl to compare high and low quality streams. This project is interested in using diatom communities to monitor freshwater stream health. Samples were taken in impacted and non-impacted streams and amplified with 16s metabarcoding primers. See [this](metadata/algae-metadata.tsv) metadata file for a list of the samples sequenced. Compare different water boidies (ex: WaterbodyName from the metadata sheet) 
 ```
 /tmp/gen711_project_data/algae/fastqs
 /tmp/gen711_project_data/algae/metadata.tsv
@@ -26,9 +26,7 @@ There are 4 dataset options for the eDNA Metabarcoding analysis project.
 /tmp/gen711_project_data/eDNA-fqs/FMT/fmt-tutorial-demux-1.qza
 /tmp/gen711_project_data/eDNA-fqs/FMT/sample-metadata.tsv
 ```
-4. Cyanobacteria. Water samples were sequenced from different sites around Martha's Vineyard (Egratown Great Pond for example, see metadata) for all cyanobacteria (WLW in metadata), small/piccocyanobacteria (<5), and bloom-forming cyanbobacteria.  
-See [this](metadata/cyano-metadata_salinity.tsv) metadata file for a list of the samples sequenced
-See [this](https://www.scirp.org/journal/paperinformation?paperid=125865) publication on more info about the dataset
+4. Cyanobacteria. Water samples were sequenced from different sites around Martha's Vineyard (Egratown Great Pond for example, see metadata) for all cyanobacteria (WLW in metadata), small/piccocyanobacteria (<5), and bloom-forming cyanbobacteria. Compare samples from different sites and groups. See [this](metadata/cyano-metadata_salinity.tsv) metadata file for a list of the samples sequenced. See [this](https://www.scirp.org/journal/paperinformation?paperid=125865) publication on more info about the dataset. 
 ```
 /tmp/gen711_project_data/cyano/fastqs
 /tmp/gen711_project_data/fastp.sh
@@ -268,6 +266,26 @@ qiime diversity core-metrics-phylogenetic \
   --m-metadata-file metadata.tsv  \
   --p-n-jobs-or-threads
   --output-dir core-metrics
+
+qiime diversity alpha-phylogenetic \
+  --i-table feature_table_filtered.qza \
+  --i-phylogeny rooted-tree.qza \
+  --p-metric faith_pd \
+  --o-alpha-diversity core-metrics/faith_pd
+
+qiime diversity alpha-rarefaction \
+    --i-table feature_table_filtered.qza \
+    --i-phylogeny rooted-tree.qza \
+    --p-max-depth 150000 \
+    --m-metadata-file <metadata file>  \
+    --p-min-depth 100 \
+    --p-steps 15 \
+    --o-visualization core-metrics/alpha-rarefaction
+
+qiime diversity alpha-group-significance \
+    --i-alpha-diversity core-metrics/faith_pd.qza \
+    --m-metadata-file <metadata file>  \
+    --o-visualization core-metrics/alpha-group-significance
 ```
 
 #### The command above creates 'core-metrics' folder. If you need to re-run it, you might need to remove the core-metrics folder to do so. be careful with 'rm', you could delete your whole home directory (and that is why we make scripts and store things at githb). To remove the 'core-metrics' folder run only:
