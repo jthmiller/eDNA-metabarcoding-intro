@@ -201,7 +201,7 @@ qiime feature-table merge \
 
 ## Then, classify the merged files
 qiime feature-classifier classify-sklearn \
-  --i-classifier <see path to use in the file> \
+  --i-classifier <see ref-database-paths.md file for the correct classifier on RON> \
   --i-reads <output path>/rep-seqs.qza \
   --o-classification <output path>/taxonomy.qza
 
@@ -216,7 +216,7 @@ qiime taxa barplot \
 
 ```
 qiime feature-classifier classify-sklearn \
-  --i-classifier  <see path to use in the file> \
+  --i-classifier  <see ref-database-paths.md file for the correct classifier on RON> \
   --i-reads <output path>/rep-seqs.qza \
   --o-classification <output path>/classify-sklearn-taxonomy
 
@@ -227,6 +227,7 @@ qiime taxa barplot \
      --o-visualization <output path>/my-barplot.qzv
 
 ```
+Upload the 'my-barplot.qzv' file to qiime-view.org
 
 #### Metadata and background info
 Each project has a metadata file that contains info about each sample- such as the lake the sample came from, or whether the sample came from a 'stool' sample or a sample collected by 'swab' (as in the FMT). We use this info to make comparisons for the results. To include this in your barplots, re-run the barplot command from above, and include the '--m-metadata-file' optional input.
@@ -243,6 +244,8 @@ qiime taxa barplot \
      --i-taxonomy taxonomy.qza \
      --o-visualization filtered-barplot.qzv
 ```
+
+Upload the 'filtered-barplot.qzv' file to qiime-view.org
 
 ## 7. Diversity analysis and phylogenetic placement of ASVs
 ```
