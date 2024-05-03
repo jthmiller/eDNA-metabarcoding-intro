@@ -8,25 +8,26 @@ This is an introduction analyzing eDNA metabarcoding samples to evaluate diversi
 There are 4 dataset options for the eDNA Metabarcoding analysis project. 
 
 ## Fastqs, metadata, and the fastp shell script for each project can be found
-1. Metabarcoding to compare (fish) species across US estuaries. Water from estuaries were filtered for eDNA and amplified with the MiFish 12s primer to compare fish communities between coasts (Gulf, Pacific, Atlantic) and seasons (sampled at 5 sites in 10 different estuaries 4 times per year)  
+1. Metabarcoding to compare (fish) species across US estuaries. Water from estuaries were filtered for eDNA and amplified with the MiFish 12s primer to compare fish communities between coasts (Gulf, Pacific, Atlantic) and seasons (sampled at 5 sites in 10 different estuaries 4 times per year). See [this](metadata/mifish-metadata.tsv) metadata file for a list of the samples sequenced 
 
 ```
 /tmp/gen711_project_data/fish/fastqs
 /tmp/gen711_project_data/fish/metadata.tsv
 /tmp/gen711_project_data/fastp.sh
 ```
-2. Metabarcoding of Algae (Diatoms) using rbcl to compare high and low quality streams. This project is interested in using diatom communities to monitor freshwater stream health. Samples were taken in impacted and non-impacted streams and amplified with 16s metabarcoding primers
+2. Metabarcoding of Algae (Diatoms) using rbcl to compare high and low quality streams. This project is interested in using diatom communities to monitor freshwater stream health. Samples were taken in impacted and non-impacted streams and amplified with 16s metabarcoding primers. See [this](metadata/algae-metadata.tsv) metadata file for a list of the samples sequenced
 ```
 /tmp/gen711_project_data/algae/fastqs
 /tmp/gen711_project_data/algae/metadata.tsv
 /tmp/gen711_project_data/fastp.sh
 ```
-3. Fecal microbiota transplant (FMT) study. From the Qiime website: The data used in this tutorial is derived from a Fecal Microbiome Transplant study where children under the age of 18 with autism and gastrointestinal disorders, as measured by the Autism Diagnostic Interview-Revised (ADI-R) and Gastrointestinal Symptom Rating Scale (GSRS), respectively, were treated with fecal microbiota transplant in attempt to reduce the severity of their behavioral and gastrointestinal symptoms. We tracked changes in their microbiome, several metrics of the severity of autism including the Parent Global Impressions-III (PGI-III) and the Childhood Autism Rating Scale (CARS), and the severity of their gastrointestinal symptoms through their GSRS score over an eighteen week period. The microbiome was tracked through collection of weekly fecal swab samples (collected by swabbing used toilet paper) and less frequent stool samples (collected as whole stool). In the full study, which was a phase 1 clinical trial designed to test safety of the treatment, eighteen individuals received the treatment, and twenty individuals were followed as controls. The controls did not receive the treatment, but were monitored to track normal temporal variation in the gut microbiome. The fecal material that was transplanted during treatment was also sequenced in this study.
+3. Fecal microbiota transplant (FMT) study. From the Qiime website: The data used in this tutorial is derived from a Fecal Microbiome Transplant study where children under the age of 18 with autism and gastrointestinal disorders, as measured by the Autism Diagnostic Interview-Revised (ADI-R) and Gastrointestinal Symptom Rating Scale (GSRS), respectively, were treated with fecal microbiota transplant in attempt to reduce the severity of their behavioral and gastrointestinal symptoms. We tracked changes in their microbiome, several metrics of the severity of autism including the Parent Global Impressions-III (PGI-III) and the Childhood Autism Rating Scale (CARS), and the severity of their gastrointestinal symptoms through their GSRS score over an eighteen week period. The microbiome was tracked through collection of weekly fecal swab samples (collected by swabbing used toilet paper) and less frequent stool samples (collected as whole stool). In the full study, which was a phase 1 clinical trial designed to test safety of the treatment, eighteen individuals received the treatment, and twenty individuals were followed as controls. The controls did not receive the treatment, but were monitored to track normal temporal variation in the gut microbiome. The fecal material that was transplanted during treatment was also sequenced in this study. See [this](metadata/sample-metadata.tsv) metadata file for a list of the samples sequenced
 ```
 /tmp/gen711_project_data/eDNA-fqs/FMT/fmt-tutorial-demux-1.qza
 /tmp/gen711_project_data/eDNA-fqs/FMT/sample-metadata.tsv
 ```
-4. Cyanobacteria
+4. Cyanobacteria 
+See [this](metadata/cyano-metadata_salinity.tsv) metadata file for a list of the samples sequenced
 ```
 /tmp/gen711_project_data/cyano/fastqs
 /tmp/gen711_project_data/fastp.sh
