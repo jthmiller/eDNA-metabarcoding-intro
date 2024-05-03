@@ -108,14 +108,9 @@ qiime feature-table tabulate-seqs \
 ## Taxonomy assignment 
 - Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between primer and reference databases. 
 ```
-qiime feature-classifier classify-consensus-vsearch \
-  --i-query <output path>/rep-seqs.qza \
-  --i-reference-reads <refreads> \
-  --i-reference-taxonomy  <reftax> \
-  --p-maxaccepts 10 \
-  --p-query-cov 0.80 \
-  --p-perc-identity 0.9 \
-  --p-threads 36 \
+qiime feature-classifier classify-sklearn \
+  --i-classifier /tmp/gen711_project_data/reference_databases/classifier.qza \
+  --i-reads <output path>/rep-seqs.qza \
   --o-classification <output path>/taxonomy.qza
 
 ### Barplot 
@@ -153,7 +148,7 @@ qiime phylogeny align-to-tree-mafft-fasttree \
   --o-rooted-tree rooted-tree \
   --p-n-threads 4
 
- same as barplot metadata
+# same as barplot metadata
 qiime diversity core-metrics-phylogenetic \
   --i-phylogeny rooted-tree.qza \
   --i-table feature_table.qza \
