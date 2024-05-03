@@ -327,6 +327,61 @@ qiime diversity beta-group-significance \
   --o-visualization core-metrics/unweighted_unifrac-beta-group-significance
 ```
 
+## To look at a table in excel of the species you found run this:
+
+## Not working
+```
+mkdir tables
+
+qiime tools export \
+  --input-path taxonomy.qza \
+  --output-path tables/ 
+
+qiime tools export \
+  --input-path feature_table_filtered.qza \
+  --output-path tables/
+
+biom add-metadata \
+  --input-fp tables/feature-table.biom \
+  -o tables/table-with-taxonomy.biom \
+  --observation-metadata-fp tables/taxonomy.tsv \
+  --observation-header "taxonomy" \
+  --sc-separated taxonomy
+
+biom convert \
+-i tables/table-with-taxonomy.biom \
+-o tables/otu-table.tsv \
+--to-tsv --header-key taxonomy
+
+```
+
 ![plot](plots/alpha-sig.png)
 ![plot](plots/beta-sig.png)
 ![plot](plots/jplace.png)
+
+
+
+
+qiime tools export \
+  --input-path HIDAR-COI_bold_hybrid_taxonomy.qza \
+  --output-path tables/ 
+
+qiime tools export \
+  --input-path filtered-by-features_HIDAR-COI_midori_table_wControls.qza \
+  --output-path tables/
+
+sed -i "s/Feature ID\tTaxon/\#OUTID\ttaxonomy/" tables/taxonomy.tsv
+cut -f1,2,3 tables/taxonomy.tsv > tax
+mv tax tables/taxonomy.tsv
+
+biom add-metadata \
+  --input-fp tables/feature-table.biom \
+  -o tables/table-with-taxonomy.biom \
+  --observation-metadata-fp tables/taxonomy.tsv \
+  --observation-header "taxonomy" \
+  --sc-separated taxonomy
+
+biom convert \
+-i tables/table-with-taxonomy.biom \
+-o tables/otu-table.tsv \
+--to-tsv --header-key taxonomy
