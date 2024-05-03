@@ -184,6 +184,8 @@ qiime feature-table tabulate-seqs \
 
 ## Taxonomy assignment 
 - Taxonomy assignment can be performed several ways. We've found that the best taxonomy assignment strategy differs between primer and reference databases. This is the step that finally gets easier for the FMT compared to the other datasets. Here is how you assign taxonomy on the FMT dataset.
+
+## Only do these steps if you are working on the FMT project
 ```
 ## For FMT, merge rep-seqs
 qiime feature-table merge-seqs \
@@ -196,45 +198,28 @@ qiime feature-table merge \
   --i-tables <output path>/feature_table-1.qza \
   --i-tables <output path>/feature_table-2.qza \
   --o-merged-table results/feature_table.qza
-```
 
-### FMT taxononmy classification
-Then, classify them...
-```
+## Then, classify the merged files
 qiime feature-classifier classify-sklearn \
-  --i-classifier /tmp/gen711_project_data/reference_databases/classifier.qza \
+  --i-classifier <see path to use in the file> \
   --i-reads <output path>/rep-seqs.qza \
   --o-classification <output path>/taxonomy.qza
 
+### Make a barplot to view on qiime-view.org
 qiime taxa barplot \
      --i-table <output path>/feature_table.qza \
      --i-taxonomy <output path>/FMT-taxonomy.qza \
      --o-visualization <output path>/barplot.qzv
 ```
 
-## For CYANO only
-# Classify rep seqs
+## Only do these steps if you are working on the cyano,mifish or algea projects
+
 ```
 qiime feature-classifier classify-sklearn \
---i-classifier /tmp/gen711_project_data/cyano/classifier_16S_V4-V5.qza \
---i-reads <output path>/rep-seqs.qza \
---o-classification <output path>/
-    
-```
+  --i-classifier  <see path to use in the file> \
+  --i-reads <output path>/rep-seqs.qza \
+  --o-classification <output path>/classify-sklearn-taxonomy
 
-
-Here is what is needed for fish and algae:
-
-```
-qiime feature-classifier classify-consensus-vsearch \
-  --i-query <output path>/rep-seqs.qza \
-  --i-reference-reads <refreads> \
-  --i-reference-taxonomy  <reftax> \
-  --p-maxaccepts 10 \
-  --p-query-cov 0.80 \
-  --p-perc-identity 0.9 \
-  --p-threads 36 \
-  --o-classification <output path>/taxonomy.qza
 
 ### Barplot 
 qiime taxa barplot \
