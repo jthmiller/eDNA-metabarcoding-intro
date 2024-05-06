@@ -8,7 +8,9 @@ This is an introduction analyzing eDNA metabarcoding samples to evaluate diversi
 There are 4 dataset options for the eDNA Metabarcoding analysis project. 
 
 ## Fastqs, metadata, and the fastp shell script for each project can be found
-1. Metabarcoding to compare (fish) species across US estuaries. Water from estuaries were filtered for eDNA and amplified with the MiFish 12s primer to compare fish communities between coasts (Gulf, Pacific, Atlantic) and seasons (sampled at 5 sites in 10 different estuaries 4 times per year). See [this](metadata/mifish-metadata.tsv) metadata file for a list of the samples sequenced 
+1. Metabarcoding to compare (fish) species across US estuaries. Water from estuaries were filtered for eDNA and amplified with the MiFish 12s primer to compare fish communities between coasts (Gulf, Pacific, Atlantic) and seasons (sampled at 5 sites in 10 different estuaries 4 times per year). See [this](metadata/mifish-metadata.tsv) metadata file for a list of the samples sequenced. This project is to demonstrate the capacity for eDNA Metabarcoding as a tool for monitoring and conservation of aquatic systems. Look for species of concern at sites, or are there fish species that are incorrect?. Compare diversity (count of species identified at sites and the different estuaries).  Are the
+
+See more info about this project [here](https://www.ednaexplorer.org/projects/clu776zde0003l70fjo383wfy?list=None&taxonomy=Species&abundance=0.00005&mismatches=25&minReads=0&metabarcoding=1&qPCR=1&speciesOnly=0&startDate=2023-07-30&endDate=2023-11-01&primer=18S_Euk&geographicScale=Local&alphaDiversity=Chao1&betaDiversity=jaccard&alphaEnvironmentalVariable=site&betaEnvironmentalVariable=site&tab=organism+diversity&sampleSegmentation=Sites&sites=None&includePrimates=0)
 
 ```
 /tmp/gen711_project_data/fish/fastqs
